@@ -2,9 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route  } from "react-router-dom";
 import Header from './components/header';
 import Home from './components/home';
-
-const Jelajah = () => <h2>Jelajah</h2>;
-const Pencarian = () => <h2>Pencarian</h2>;
+import Jelajah from './components/jelajah';
+import Pencarian from './components/pencarian';
 
 const App = () => (
   <Router>
