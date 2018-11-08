@@ -14,3 +14,11 @@ body {
   width: 1160px;
   margin: 0 auto;
 }
+
+.slick-dots li button:before {
+  font-size: 15px;
+  color: #C47373;
+}
+.slick-dots li.slick-active button:before {
+  color: #C47373;
+}

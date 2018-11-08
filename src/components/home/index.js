@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import { Carousel } from './components/carousel';
 import { Berita } from './components/berita';
+import { LinkCarousel } from './components/link-carousel';
 import './index.css';
 import 'simple-line-icons/css/simple-line-icons.css'
+import dataWeb from './data/web.json';
+import dataWalidata from './data/walidata.json';
 
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplaySpeed: 2000,
-  autoplay: true,
-};
 class Home extends Component {
   render() {
     return (
@@ -37,12 +31,14 @@ class Home extends Component {
           </div>
         </div>
         <Berita />
-        <div>
-          Web GIS
-        </div>
-        <div>
-          Walidata
-        </div>
+        <LinkCarousel
+          title="Web GIS"
+          data={dataWeb.data}
+        />
+        <LinkCarousel
+          title="Walidata"
+          data={dataWalidata.data}
+        />
         <div>
           Kategori Dataset
         </div>
