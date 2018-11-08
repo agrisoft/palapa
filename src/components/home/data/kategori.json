@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "link": "#",
+      "label": "Batas Wilayah",
+      "image": "/assets/kategori/batas-wilayah.png",
+      "count": 3
+    },
+    {
+      "link": "#",
+      "label": "Dataset Khusus",
+      "image": "/assets/kategori/dataset-khusus.png",
+      "count": 1
+    },
+    {
+      "link": "#",
+      "label": "Hidrologi",
+      "image": "/assets/kategori/hidrologi.png",
+      "count": 2
+    },
+    {
+      "link": "#",
+      "label": "Kadaster",
+      "image": "/assets/kategori/kadaster.png",
+      "count": 1
+    },
+    {
+      "link": "#",
+      "label": "Kebencanaan",
+      "image": "/assets/kategori/kebencanaan.png",
+      "count": 2
+    },
+    {
+      "link": "#",
+      "label": "Toponimi",
+      "image": "/assets/kategori/toponimi.png",
+      "count": 1
+    },
+    {
+      "link": "#",
+      "label": "transportasi",
+      "image": "/assets/kategori/transportasi.png",
+      "count": 2
+    },
+    {
+      "link": "#",
+      "label": "Vegetasi",
+      "image": "/assets/kategori/vegetasi.png",
+      "count": 14
+    }
+  ]
+}

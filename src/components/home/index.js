@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Carousel } from './components/carousel';
 import { Berita } from './components/berita';
 import { LinkCarousel } from './components/link-carousel';
+import { Kategori } from './components/kategori';
 import './index.css';
 import 'simple-line-icons/css/simple-line-icons.css'
 import dataWeb from './data/web.json';
 import dataWalidata from './data/walidata.json';
+import dataKategori from './data/kategori.json';
 
 class Home extends Component {
   render() {
@@ -39,9 +41,9 @@ class Home extends Component {
           title="Walidata"
           data={dataWalidata.data}
         />
-        <div>
-          Kategori Dataset
-        </div>
+        <Kategori
+          data={dataKategori.data}
+        />
         <div>
           Dataset Terbaru
         </div>
