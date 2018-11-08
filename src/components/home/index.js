@@ -3,11 +3,13 @@ import { Carousel } from './components/carousel';
 import { Berita } from './components/berita';
 import { LinkCarousel } from './components/link-carousel';
 import { Kategori } from './components/kategori';
+import { DatasetTerbaru } from './components/dataset-terbaru';
 import './index.css';
 import 'simple-line-icons/css/simple-line-icons.css'
 import dataWeb from './data/web.json';
 import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
+import dataTerbaru from './data/terbaru.json';
 
 class Home extends Component {
   render() {
@@ -33,20 +35,10 @@ class Home extends Component {
           </div>
         </div>
         <Berita />
-        <LinkCarousel
-          title="Web GIS"
-          data={dataWeb.data}
-        />
-        <LinkCarousel
-          title="Walidata"
-          data={dataWalidata.data}
-        />
-        <Kategori
-          data={dataKategori.data}
-        />
-        <div>
-          Dataset Terbaru
-        </div>
+        <LinkCarousel title="Web GIS" data={dataWeb.data} />
+        <LinkCarousel title="Walidata" data={dataWalidata.data} />
+        <Kategori data={dataKategori.data} />
+        <DatasetTerbaru data={dataTerbaru.data} />
         <div>
           Footer
         </div>

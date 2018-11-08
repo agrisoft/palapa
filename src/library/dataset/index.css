@@ -1,0 +1,61 @@
+.dataset {
+  position: relative;
+  overflow: hidden;
+  width: 260px;
+  height: 355px;
+  border: 1px solid #BFBFBF;
+  border-radius: 5px;
+  background: #F5F5F5;
+}
+.dataset__image-wrapper {
+  height: 260px;
+  padding: 10px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #E3E3E3;
+  border-width: 0 0 1px;
+  border-radius: 5px 5px 20px 20px;
+}
+.dataset__image {
+  max-width: 100%;
+  max-height: 100%;
+}
+.dataset__title {
+  padding: 5px 10px 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dataset__kategori {
+  padding: 5px 10px 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.dataset__author {
+  padding: 5px 10px 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dataset__actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 5px;
+  border-radius: 0 0 0 5px;
+  background: #717171;
+}
+.dataset__actions a {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  padding: 7px;
+}
+.dataset__actions a:hover {
+  background: #555;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route  } from "react-router-dom";
-import Header from './components/header';
+import Header from './library/header';
 import Home from './components/home';
 import Jelajah from './components/jelajah';
 import Pencarian from './components/pencarian';
