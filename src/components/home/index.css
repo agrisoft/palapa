@@ -37,6 +37,7 @@
   float: left;
   width: 60px;
   height: 60px;
+  cursor: pointer;
   padding-top: 15px;
   border-radius: 30px;
   text-decoration: none;
@@ -45,8 +46,18 @@
   text-align: center;
   background: #E4E4E4;
 }
+.search-active {
+  background-color: rgba(210, 210, 210, 0.7);
+}
+.search-active .search__advanced-link {
+  color: #fff;
+  background: #4B4B4B;
+}
 .search__advanced-link:hover {
   background: #ccc;
+}
+.search-active .search__advanced-link:hover {
+  background: #333;
 }
 .search__input {
   float: right;

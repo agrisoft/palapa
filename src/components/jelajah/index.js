@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Map, TileLayer, ZoomControl } from 'react-leaflet'
+import { Map, TileLayer, ZoomControl } from 'react-leaflet';
 
 import './index.css';
 

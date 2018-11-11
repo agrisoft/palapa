@@ -2,9 +2,10 @@
   position: relative;
   overflow: hidden;
   width: 260px;
-  height: 355px;
+  height: 345px;
   border: 1px solid #BFBFBF;
-  border-radius: 5px;
+  border-radius: 10px;
+  font-size: 14px;
   background: #F5F5F5;
 }
 .dataset__image-wrapper {
@@ -58,4 +59,44 @@
 }
 .dataset__actions a:hover {
   background: #555;
+}
+.pencarian__input-wrapper {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+.pencarian__input {
+  float: right;
+  height: 60px;
+  width: 800px;
+  font-size: 22px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid #C6C6C6;
+}
+.pencarian__submit {
+  float: right;
+  width: 60px;
+  height: 60px;
+  padding-top: 15px;
+  border-radius: 0 5px 5px 0;
+  text-decoration: none;
+  color: #4A4A4A;
+  font-size: 24px;
+  text-align: center;
+  background: #E4E4E4;
+  border-left: 1px solid #aaa;
+}
+.pencarian__submit:hover {
+  background: #ccc;
+}
+.pagination {
+  padding: 20px 0 100px 40px;
+}
+.pagination__item,
+.pagination__item-current {
+  padding: 10px 17px;
+  border: 1px solid #979797;
+  background: #fff;
+  margin-right: 10px;
 }
