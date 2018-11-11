@@ -4,6 +4,7 @@ import { Berita } from './components/berita';
 import { LinkCarousel } from './components/link-carousel';
 import { Kategori } from './components/kategori';
 import { DatasetTerbaru } from './components/dataset-terbaru';
+import { Footer } from '../../library/footer';
 import './index.css';
 import 'simple-line-icons/css/simple-line-icons.css'
 import dataWeb from './data/web.json';
@@ -39,9 +40,7 @@ class Home extends Component {
         <LinkCarousel title="Walidata" data={dataWalidata.data} />
         <Kategori data={dataKategori.data} />
         <DatasetTerbaru data={dataTerbaru.data} />
-        <div>
-          Footer
-        </div>
+        <Footer />
       </div>
     );
   }
