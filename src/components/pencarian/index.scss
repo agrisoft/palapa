@@ -1,0 +1,112 @@
+.pencarian {
+  & .container {
+    overflow: hidden;
+  }
+  &__filter {
+    float: left;
+    width: 260px;
+    margin-top: 50px;
+    border: 1px solid #E3E3E3;
+    background: #fff;
+
+    h3 {
+      font-size: 16px;
+      font-weight: normal;
+      margin: 0;
+      padding: 15px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #E3E3E3;
+      background: #F5F5F5;
+    }
+  }
+  &__panel {
+    padding: 0 15px 10px;
+    h4 {
+      font-size: 16px;
+      font-weight: bold;
+      color: #525252;
+      margin: 0;
+      padding: 15px 0 5px;
+      border-bottom: 5px solid #D8D8D8;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      width: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 5px 0;
+      font-size: 14px;
+      list-style: none;
+    }
+  }
+  &__filter-item {
+    float: left;
+  }
+  &__filter-count {
+    float: right;
+    padding: 3px 8px;
+    border-radius: 14px;
+    background: #eee;
+  }
+  &__peta {
+    margin: 10px 0;
+    height: 160px;
+    background: #eee;
+  }
+  &__content {
+    float: right;
+    margin-top: 50px;
+    width: 900px;
+  }
+  &__input-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 40px;
+  }
+  &__input {
+    float: right;
+    height: 60px;
+    width: 800px;
+    font-size: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #C6C6C6;
+  }
+  &__submit {
+    float: right;
+    width: 60px;
+    height: 60px;
+    padding-top: 15px;
+    border-radius: 0 5px 5px 0;
+    text-decoration: none;
+    color: #4A4A4A;
+    font-size: 24px;
+    text-align: center;
+    background: #E4E4E4;
+    border-left: 1px solid #aaa;
+    &:hover {
+      background: #ccc;
+    }
+  }
+  &__dataset__list {
+    width: 100%;
+    overflow: hidden;
+  &__item {
+    float: left;
+    margin: 0 0 40px 40px;
+  }
+  }
+}
+.pagination {
+  padding: 20px 0 100px 40px;
+}
+.pagination__item,
+.pagination__item-current {
+  padding: 10px 17px;
+  border: 1px solid #979797;
+  background: #fff;
+  margin-right: 10px;
+}

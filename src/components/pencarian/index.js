@@ -4,7 +4,7 @@ import { Dataset } from '../../library/dataset';
 import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
 import dataDataset from './data/dataset.json';
-import './index.css';
+import './index.scss';
 
 const Pencarian = () => {
   return (
@@ -46,9 +46,9 @@ const Pencarian = () => {
             </a>
             <input type="text" placeholder="Kata Kunci" className="pencarian__input" />
           </div>
-          <div className="dataset__list">
+          <div className="pencarian__dataset__list">
             {dataDataset.data.map((item) => (
-              <div className="dataset__list__item">
+              <div className="pencarian__dataset__list__item">
                 <Dataset {...item} />
               </div>
             ))}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Dataset from '../../../../library/dataset';
-import './index.css';
+import './index.scss';
 
 export const DatasetTerbaru = ({ data }) => (
   <div className="dataset-terbaru">

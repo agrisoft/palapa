@@ -5,7 +5,7 @@ import Header from './library/header';
 import Home from './components/home';
 import Jelajah from './components/jelajah';
 import Pencarian from './components/pencarian';
-import './index.css';
+import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
 const App = () => (

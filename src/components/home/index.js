@@ -7,7 +7,7 @@ import { LinkCarousel } from './components/link-carousel';
 import { Kategori } from './components/kategori';
 import { DatasetTerbaru } from './components/dataset-terbaru';
 import { Footer } from '../../library/footer';
-import './index.css';
+import './index.scss';
 import 'simple-line-icons/css/simple-line-icons.css'
 import dataWeb from './data/web.json';
 import dataWalidata from './data/walidata.json';
