@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Carousel } from './components/carousel';
 import { Footer } from '../../library/footer';
 import { Dataset } from '../../library/dataset';
 import dataWalidata from './data/walidata.json';
@@ -9,6 +10,14 @@ import './index.scss';
 const Pencarian = () => {
   return (
     <div className="pencarian">
+      <div className="pencarian__banner">
+        <Carousel />
+        <div className="pencarian__banner__overlay">
+          <div className="container">
+            <h2>Pencarian Data</h2>
+          </div>
+        </div>
+      </div>
       <div className="container">
         <div className="pencarian__filter">
           <h3>Filter Pencarian</h3>

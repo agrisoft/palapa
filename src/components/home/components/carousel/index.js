@@ -4,6 +4,9 @@ import Slider from "react-slick";
 import './index.css';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import image1 from './images/1.jpg';
+import image2 from './images/2.jpg';
+import image3 from './images/3.jpg';
 
 const settings = {
   dots: true,
@@ -19,13 +22,13 @@ export const Carousel = () => (
   <div className="carousel">
     <Slider {...settings}>
       <div>
-        <div className="carousel__image" style={{ backgroundImage: 'url("/assets/images/slider/1.jpg")' }} />
+        <div className="carousel__image" style={{ backgroundImage: 'url("' + image1 + '")' }} />
       </div>
       <div>
-        <div className="carousel__image" style={{ backgroundImage: 'url("/assets/images/slider/2.jpg")' }} />
+        <div className="carousel__image" style={{ backgroundImage: 'url("' + image2 + '")' }} />
       </div>
       <div>
-        <div className="carousel__image" style={{ backgroundImage: 'url("/assets/images/slider/3.jpg")' }} />
+        <div className="carousel__image" style={{ backgroundImage: 'url("' + image3 + '")' }} />
       </div>
     </Slider>
   </div>
