@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Map, TileLayer, ZoomControl } from 'react-leaflet';
 import { Carousel } from './components/carousel';
 import { Footer } from '../../library/footer';
 import { Dataset } from '../../library/dataset';
@@ -23,7 +24,14 @@ const Pencarian = () => {
           <h3>Filter Pencarian</h3>
           <div className="pencarian__panel">
             <h4>Batas Pencarian</h4>
-            <div className="pencarian__peta"></div>
+            <div className="pencarian__peta">
+              <Map center={[ -6.175985, 106.827313 ]} zoom={12} zoomControl={false}>
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <ZoomControl position="topleft" />
+              </Map>
+            </div>
             <h4>Walidata</h4>
             <ul>
               {dataWalidata.data.map((item) => {
