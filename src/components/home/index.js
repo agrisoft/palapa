@@ -15,7 +15,7 @@ import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
 import dataTerbaru from './data/terbaru.json';
 
-const colourStyles = {
+const selectColorStyles = {
   control: styles => ({ ...styles,
     borderRadius: 0,
     height: 60,
@@ -58,10 +58,10 @@ export const Home = () => {
             </a>
             <div className="search__select-wrapper">
               <div className="search__select-kategori">
-                <Select placeholder="Semua Kategori" options={dataKategori.data} styles={colourStyles} />
+                <Select placeholder="Semua Kategori" options={dataKategori.data} styles={selectColorStyles} />
               </div>
               <div className="search__select-walidata">
-                <Select placeholder="Semua Walidata" options={dataWalidata.data} styles={colourStyles} />
+                <Select placeholder="Semua Walidata" options={dataWalidata.data} styles={selectColorStyles} />
               </div>
             </div>
             <input type="text" placeholder="Kata Kunci" className="search__input" />

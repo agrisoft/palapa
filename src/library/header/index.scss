@@ -36,4 +36,58 @@
       color: #7F1818;
     }
   }
+  &__nav-handle {
+    display: none;
+  }
+}
+
+.layout-small {
+  .header {
+    height: auto;
+    &__logo {
+      padding: 0 0 10px 20px;
+      width: 100%;
+      overflow: hidden;
+      float: none;
+    }
+    &__nav {
+      height: 0;
+      overflow: hidden;
+      float: none;
+      a {
+        float: none;
+        display: block;
+        margin: 0;
+        height: auto;
+        padding: 10px 20px;
+        border-bottom: 1px solid #fff;
+        background: #eee;
+      }
+    }
+    &__nav-handle {
+      display: block;
+      float: right;
+      margin: 20px 20px 0;
+      background: #eee;
+      padding: 5px 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    &-active {
+      .header__nav {
+        height: auto;
+        overflow: visible;
+      }
+      .header__nav-handle {
+        color: #fff;
+        background: #4B4B4B;
+      }
+    }
+  }
+}
+
+.layout-medium {
+  .header {
+    padding: 0 20px;
+  }
 }

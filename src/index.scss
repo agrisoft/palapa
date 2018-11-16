@@ -14,7 +14,18 @@ body {
   width: 1160px;
   margin: 0 auto;
 }
-
+.layout-small {
+  .container {
+    width: 100%;
+    margin: 0;
+  }
+}
+.layout-medium {
+  .container {
+    width: 100%;
+    margin: 0;
+  }
+}
 .slick-dots li button:before {
   font-size: 15px;
   color: #C47373;
