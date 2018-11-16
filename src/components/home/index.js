@@ -78,11 +78,11 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <Berita />
-      <LinkCarousel title="Web GIS" data={dataWeb.data} />
-      <LinkCarousel title="Walidata" data={dataWalidata.data} />
-      <Kategori data={dataKategori.data} />
       <DatasetTerbaru data={dataTerbaru.data} />
+      <Kategori data={dataKategori.data} />
+      <LinkCarousel title="Instansi" data={dataWalidata.data} />
+      <LinkCarousel title="Web GIS" data={dataWeb.data} />
+      <Berita />
       <Footer />
     </div>
   );

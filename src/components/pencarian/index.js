@@ -32,9 +32,9 @@ const Pencarian = () => {
                 <ZoomControl position="topleft" />
               </Map>
             </div>
-            <h4>Walidata</h4>
+            <h4>Kategori</h4>
             <ul>
-              {dataWalidata.data.map((item) => {
+              {dataKategori.data.map((item) => {
                 return (
                   <li>
                     <span className="pencarian__filter-item">{item.label}</span>
@@ -43,9 +43,9 @@ const Pencarian = () => {
                 )
               })}
             </ul>
-            <h4>Kategori</h4>
+            <h4>Instansi</h4>
             <ul>
-              {dataKategori.data.map((item) => {
+              {dataWalidata.data.map((item) => {
                 return (
                   <li>
                     <span className="pencarian__filter-item">{item.label}</span>
