@@ -25,8 +25,8 @@ function useMedia(query) {
 }
 
 const App = () => {
-  let isSmall = useMedia("(max-width: 768px)");
-  let isMedium = useMedia("(min-width: 768px) and (max-width : 1160px)");
+  let isSmall = useMedia("(max-width: 760px)");
+  let isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
   let className = isSmall ? 'layout-small' : '';
   if (!className && isMedium) {
     className = 'layout-medium';

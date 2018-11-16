@@ -9,6 +9,7 @@
     img {
       float: left;
       margin-top: 12px;
+      max-height: 57px;
     }
     h1 {
       float: left;
@@ -45,10 +46,16 @@
   .header {
     height: auto;
     &__logo {
-      padding: 0 0 10px 20px;
+      padding: 0 0 13px 20px;
       width: 100%;
       overflow: hidden;
       float: none;
+      h1 {
+        font-size: 17px;
+      }
+      img {
+        max-height: 45px;
+      }
     }
     &__nav {
       height: 0;
@@ -67,7 +74,7 @@
     &__nav-handle {
       display: block;
       float: right;
-      margin: 20px 20px 0;
+      margin: 15px 20px 0;
       background: #eee;
       padding: 5px 10px;
       font-size: 20px;

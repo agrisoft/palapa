@@ -13,7 +13,7 @@ const Header = () => {
     <div className={headerClassName}>
       <div className="container">
         <div className="header__logo">
-          <img src="/assets/images/logo.png" alt="" width={44} height={57} />
+          <img src="/assets/images/logo.png" alt="" />
           <h1>Geoportal Demo BIG</h1>
           <div
             className="header__nav-handle"
