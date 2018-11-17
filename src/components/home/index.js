@@ -35,6 +35,7 @@ function useMedia(query) {
 export const Home = () => {
   const [isAdvanceActive, setAdvanceActive] = useState(true);
   let isSmall = useMedia("(max-width: 760px)");
+  let isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
   let searchClassName = 'search';
   if (isAdvanceActive) {
     searchClassName = 'search search-active';
@@ -48,7 +49,12 @@ export const Home = () => {
     }),
   };
 
-  const mapHeight = isSmall ? 200 : 650;
+  let mapHeight = 650;
+  if (isSmall) {
+    mapHeight = 200;
+  } else if (isMedium) {
+    mapHeight = 400;
+  }
 
   return (
     <div className="home">
