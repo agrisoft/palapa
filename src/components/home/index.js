@@ -15,20 +15,40 @@ import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
 import dataTerbaru from './data/terbaru.json';
 
-const selectColorStyles = {
-  control: styles => ({ ...styles,
-    borderRadius: 0,
-    height: 60,
-    backgroundColor: '#f1f1f1',
-  }),
-};
+function useMedia(query) {
+  const [matches, setMatches] = useState(window.matchMedia(query).matches);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    media.addListener(listener);
+    return () => media.removeListener(listener);
+  }, [query]);
+
+  return matches;
+}
+
 
 export const Home = () => {
-  const [isAdvanceActive, setAdvanceActive] = useState(false);
+  const [isAdvanceActive, setAdvanceActive] = useState(true);
+  let isSmall = useMedia("(max-width: 760px)");
   let searchClassName = 'search';
   if (isAdvanceActive) {
     searchClassName = 'search search-active';
   }
+
+  const selectColorStyles = {
+    control: styles => ({ ...styles,
+      borderRadius: 0,
+      height: isSmall ? 40 : 60,
+      backgroundColor: '#f1f1f1',
+    }),
+  };
+
+  const mapHeight = isSmall ? 200 : 650;
 
   return (
     <div className="home">
@@ -53,19 +73,23 @@ export const Home = () => {
             >
               <span className="icon-settings" />
             </span>
-            <a href="#submit-search" className="search__submit">
-              <span className="icon-magnifier" />
-            </a>
+            <span className="search__submit-wrapper">
+              <a href="#submit-search" className="search__submit">
+                <span className="icon-magnifier" />
+              </a>
+            </span>
             <div className="search__select-wrapper">
               <div className="search__select-kategori">
                 <Select placeholder="Semua Kategori" options={dataKategori.data} styles={selectColorStyles} />
               </div>
               <div className="search__select-walidata">
-                <Select placeholder="Semua Walidata" options={dataWalidata.data} styles={selectColorStyles} />
+                <Select placeholder="Semua Instansi" options={dataWalidata.data} styles={selectColorStyles} />
               </div>
             </div>
-            <input type="text" placeholder="Kata Kunci" className="search__input" />
-            <div className="search__map-wrapper" style={{ height: isAdvanceActive ? 650 : 0}}>
+            <span className="search__input-wrapper">
+              <input type="text" placeholder="Kata Kunci" className="search__input" />
+            </span>
+            <div className="search__map-wrapper" style={{ height: isAdvanceActive ? mapHeight : 0}}>
               <div className="search__map">
                 <Map center={[ -6.175985, 106.827313 ]} zoom={12} zoomControl={false}>
                   <TileLayer

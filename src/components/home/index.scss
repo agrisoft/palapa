@@ -1,4 +1,6 @@
 .home {
+  position: relative;
+  
   .banner {
     position: relative;
     height: 520px;
@@ -19,7 +21,7 @@
   &__search {
     position: absolute;
     z-index: 9;
-    top: 80px;
+    top: 0;
     left: 0;
     width: 100%;
 
@@ -80,7 +82,7 @@
     float: right;
     overflow: hidden;
     position: relative;
-    z-index: 500;
+    z-index: 1001;
     height: 60px;
     width: 0;
     background: #E4E4E4;
@@ -129,5 +131,64 @@
     height: 100%;
     background: #333;
     border: 1px solid #fff;
+  }
+}
+
+.layout-small {
+  .home {
+    &__search__intro {
+      width: auto;
+      margin: 40px 20px;
+      font-size: 18px;
+    }
+  }
+  .search {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    padding: 25px 20px 20px;
+    height: auto;
+    &__input-wrapper {
+      padding: 0 40px 0 45px;
+      display: block;
+    }
+    &__input {
+      float: none;
+      width: 100%;
+      font-size: 18px;
+      height: 40px;
+    }
+    &__advanced-link {
+      height: 40px;
+      width: 40px;
+      margin: 0;
+      float: left;
+      font-size: 18px;
+      padding-top: 10px;
+    }
+    &__submit-wrapper {
+      float: right;
+    }
+    &__submit {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      margin: 0;
+      padding-top: 10px;
+      span {
+      }
+    }
+    &__select-wrapper {
+      height: 40px;
+      margin-top: 5px;
+      background: none;
+      font-size: 14px;
+    }
+    &-active .search__select-wrapper {
+      width: 100%;
+    }
+    &__map-wrapper {
+      margin: 0;
+    }
   }
 }
