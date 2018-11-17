@@ -136,6 +136,9 @@
 
 .layout-small {
   .home {
+    .banner {
+      height: 380px;
+    }
     &__search__intro {
       width: auto;
       margin: 40px 20px;
@@ -195,6 +198,9 @@
 
 .layout-medium {
   .home {
+    .banner {
+      height: 400px;
+    }
     &__search__intro {
       width: auto;
       margin: 40px 60px;

@@ -33,7 +33,7 @@ function useMedia(query) {
 
 
 export const Home = () => {
-  const [isAdvanceActive, setAdvanceActive] = useState(true);
+  const [isAdvanceActive, setAdvanceActive] = useState(false);
   let isSmall = useMedia("(max-width: 760px)");
   let isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
   let searchClassName = 'search';
