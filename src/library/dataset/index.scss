@@ -61,3 +61,18 @@
     }
   }
 }
+.layout-small {
+  .dataset {
+    width: 100%;
+    height: 245px;
+    &__image-wrapper {
+      height: 160px;
+      padding: 10px;
+    }
+  }
+}
+.layout-medium {
+  .dataset {
+    margin: 0 auto;
+  }
+}

@@ -28,3 +28,63 @@
     }
   }
 }
+.layout-small {
+  .dataset-terbaru {
+    padding: 20px 10px;
+
+    &__header {
+      position: relative;
+      margin: 0 10px 20px 10px;
+      font-size: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #999;
+      transform: rotate(0) translate(0,0);
+    }
+    &__header__line {
+      display: none;
+    }
+    &__list {
+      width: 100%;
+      overflow: hidden;
+      &__item {
+        float: left;
+        margin-left: 0;
+        width: 50%;
+        padding: 0 10px 20px;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+.layout-medium {
+  .dataset-terbaru {
+    padding: 20px 10px;
+
+    &__header {
+      position: relative;
+      margin: 0 10px 20px 10px;
+      font-size: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #999;
+      transform: rotate(0) translate(0,0);
+    }
+    &__header__line {
+      display: none;
+    }
+    &__list {
+      width: 100%;
+      overflow: hidden;
+      &__item {
+        float: left;
+        margin-left: 0;
+        width: 50%;
+        padding: 0 10px 20px;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
