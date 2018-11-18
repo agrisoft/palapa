@@ -48,3 +48,40 @@
     }
   }
 }
+.layout-small,
+.layout-medium {
+  .berita {
+    padding: 20px 10px;
+
+    &__header {
+      position: relative;
+      margin: 0 10px 20px 10px;
+      font-size: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #999;
+      transform: rotate(0) translate(0,0);
+    }
+    &__header__line {
+      display: none;
+    }
+    &__items__wrapper {
+      margin: 0;
+      padding: 0 10px;
+    }
+    &__item {
+      float: none;
+      width: auto;
+      margin: 0 0 30px;
+      &__tanggal {
+        font-size: 14px;
+      }
+      &__title {
+        font-size: 18px;
+        margin: 0 0 5px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+}
