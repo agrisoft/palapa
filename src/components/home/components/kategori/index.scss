@@ -61,3 +61,52 @@
     }
   }
 }
+.layout-small {
+  .kategori {
+    padding: 20px 10px;
+    text-align: center;
+
+    &__header {
+      position: relative;
+      margin: 0 10px 20px 10px;
+      font-size: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #999;
+      transform: rotate(0) translate(0,0);
+    }
+    &__header__line {
+      display: none;
+    }
+    &__item-wrapper {
+      padding: 5px;
+      width: 100px;
+      height: 140px;
+      overflow: hidden;
+      display: inline-block;
+      float: none;
+    }
+    &__item__logo {
+      width: 80px;
+      height: 80px;
+    }
+    &__item__label {
+      font-size: 12px;
+    }
+  }
+}
+.layout-medium {
+  .kategori {
+    padding-top: 20px;
+    &__header {
+      position: relative;
+      margin: 0 20px 20px 20px;
+      font-size: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #999;
+      transform: rotate(0) translate(0,0);
+    }
+    &__header__line {
+      display: none;
+    }
+  }
+}
