@@ -130,3 +130,50 @@
   background: #fff;
   margin-right: 10px;
 }
+
+.layout-small,
+.layout-medium {
+  .pencarian {
+    &__input-wrapper {
+      position: relative;
+      padding: 20px 60px 20px 20px;
+    }
+    &__input {
+      width: 100%;
+      font-size: 16px;
+      height: 50px;
+    }
+    &__submit {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 40px;
+      height: 50px;
+      padding-top: 14px;
+      font-size: 20px;
+    }
+    &__banner {
+      height: 90px;
+      h2 {
+        margin-top: 30px;
+        font-size: 24px;
+        padding: 0 20px;
+      }
+    }
+    &__filter {
+      display: none;
+    }
+    &__content {
+      width: 100%;
+      margin: 0;
+    }
+    &__dataset__list {
+      padding: 10px;
+      &__item {
+        width: 50%;
+        margin: 0;
+        padding: 10px;
+      }
+    }
+  }
+}
