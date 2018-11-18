@@ -53,3 +53,53 @@
     }
   }
 }
+.layout-small,
+.layout-medium {
+  .link-carousel {
+    padding: 20px 0 50px;
+
+    &__header {
+      position: relative;
+      margin: 0 20px 20px;
+      font-size: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #aaa;
+      transform: rotate(0) translate(0,0);
+    }
+    &__header__line {
+      display: none;
+    }
+    &__item {
+      text-decoration: none;
+      color: #4A4A4A;
+      &__logo {
+        display: block;
+        margin: 0 auto;
+        height: 70px;
+        width: 70px;
+        border: 2px solid #C07676;
+        border-radius: 5px;
+        background: #fff;
+        transform: rotate(-10deg);
+        text-align: center;
+        overflow: hidden;
+      }
+      &__image {
+        display: inline-block;
+        max-width: 100%;
+        max-height: 100%;
+
+      }
+      &:hover &__logo {
+        transform: rotate(0);
+      }
+      &__label {
+        display: block;
+        padding-top: 10px;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+  }
+}
