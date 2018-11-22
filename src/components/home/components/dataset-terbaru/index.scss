@@ -19,8 +19,9 @@
   &__list {
     width: 100%;
     overflow: hidden;
+    text-align: center;
     &__item {
-      float: left;
+      display: inline-block;
       margin-left: 40px;
       &:first-child {
         margin-left: 0;
