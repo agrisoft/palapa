@@ -26,8 +26,7 @@ export const Home = () => {
       .then(res => res.json())
       .then(json => {
         let data = [];
-        const recentData = json.slice(0, 4);
-        recentData.map((item) => {
+        json.map((item) => {
           data.push({
             label: item.organization,
             image: item.logo,
@@ -47,8 +46,7 @@ export const Home = () => {
       .then(res => res.json())
       .then(json => {
         let data = [];
-        const recentData = json.slice(0, 4);
-        recentData.map((item) => {
+        json.map((item) => {
           data.push({
             label: item.nama,
             image: item.logo,
