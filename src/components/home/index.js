@@ -108,7 +108,7 @@ export const Home = () => {
         </div>
       </div>
       <DatasetTerbaru />
-      <Kategori data={dataKategori.data} />
+      <Kategori />
       <LinkCarousel title="Instansi" data={dataWalidata.data} />
       <LinkCarousel title="Web GIS" data={dataWeb.data} />
       <Berita />

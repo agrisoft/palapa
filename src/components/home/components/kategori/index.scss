@@ -4,6 +4,10 @@
   color: #fff;
   background: #4E77A7;
 
+  &-loading {
+    padding-bottom: 70px;
+  }
+
   &__header {
     position: absolute;
     transform-origin: top left;
