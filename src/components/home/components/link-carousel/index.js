@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
+import PropagateLoader from 'react-spinners/PropagateLoader';
 
 import './index.scss';
 import "slick-carousel/slick/slick.css"; 
@@ -21,7 +22,27 @@ function useMedia(query) {
   return matches;
 }
 
-export const LinkCarousel = ({ title, data }) => {
+export const LinkCarousel = ({ title, data, isLoading }) => {
+  if (isLoading) {
+    return (
+      <div className="dataset-terbaru">
+        <PropagateLoader
+          className={{
+            width: 1,
+            display: 'block',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}
+          sizeUnit={"px"}
+          size={10}
+          color={'#e87171'}
+          loading={true}
+        />
+      </div>
+    );
+  }
+  if (data.length < 1) return null;
+
   const isSmall = useMedia("(max-width: 760px)");
   const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
 
@@ -31,7 +52,7 @@ export const LinkCarousel = ({ title, data }) => {
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: (data.length > numItems) ? true : false,
     speed: 500,
     slidesToShow: numItems,
     slidesToScroll: numItems,

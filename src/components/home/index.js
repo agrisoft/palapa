@@ -13,25 +13,52 @@ import 'simple-line-icons/css/simple-line-icons.css'
 import dataWeb from './data/web.json';
 import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
-
-function useMedia(query) {
-  const [matches, setMatches] = useState(window.matchMedia(query).matches);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-    const listener = () => setMatches(media.matches);
-    media.addListener(listener);
-    return () => media.removeListener(listener);
-  }, [query]);
-
-  return matches;
-}
-
+import { useMedia } from './helpers/use-media';
+import config from '../../config';
 
 export const Home = () => {
+  const [dataInstansi, setDataInstansi] = useState([]);
+  const [isLoadingInstansi, setLoadingInstansi] = useState(true);
+  const [isFetchedInstansi, setFetchedInstansi] = useState(false);
+  if (!isFetchedInstansi) {
+    setFetchedInstansi(true);
+    fetch(`${config.api}/group/listl`)
+      .then(res => res.json())
+      .then(json => {
+        let data = [];
+        const recentData = json.slice(0, 4);
+        recentData.map((item) => {
+          data.push({
+            label: item.organization,
+            image: item.logo,
+          });
+        });
+        setLoadingInstansi(false);
+        setDataInstansi(data);
+      });
+  }
+
+  const [dataWeb, setDataWeb] = useState([]);
+  const [isLoadingWeb, setLoadingWeb] = useState(true);
+  const [isFetchedWeb, setFetchedWeb] = useState(false);
+  if (!isFetchedWeb) {
+    setFetchedWeb(true);
+    fetch(`${config.api}/linkweb/list`)
+      .then(res => res.json())
+      .then(json => {
+        let data = [];
+        const recentData = json.slice(0, 4);
+        recentData.map((item) => {
+          data.push({
+            label: item.nama,
+            image: item.logo,
+          });
+        });
+        setLoadingWeb(false);
+        setDataWeb(data);
+      });
+  }
+
   const [isAdvanceActive, setAdvanceActive] = useState(false);
   let isSmall = useMedia("(max-width: 760px)");
   let isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
@@ -109,8 +136,8 @@ export const Home = () => {
       </div>
       <DatasetTerbaru />
       <Kategori />
-      <LinkCarousel title="Instansi" data={dataWalidata.data} />
-      <LinkCarousel title="Web GIS" data={dataWeb.data} />
+      <LinkCarousel title="Instansi" data={dataInstansi} isLoading={isLoadingInstansi} />
+      <LinkCarousel title="Web GIS" data={dataWeb} isLoading={isLoadingWeb} />
       <Berita />
       <Footer />
     </div>
