@@ -7,27 +7,32 @@ import config from '../../../../config';
 
 export const DatasetTerbaru = () => {
   const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [isFetched, setFetched] = useState(false);
 
-  fetch(`${config.api}/listmetalayer`)
-    .then(res => res.json())
-    .then(json => {
-      let data = [];
-      const recentData = json.slice(0, 4);
-      recentData.map((item) => {
-        data.push({
-          title: item.title,
-          kategori: item.keywords,
-          image: `${config.host}/gsassets/thumbnails/` + item.identifier.replace(/\:/,'-') + '.png',
-          author: item.workspace,
+  if (!isFetched) {
+    setFetched(true);
+    fetch(`${config.api}/listmetalayer`)
+      .then(res => res.json())
+      .then(json => {
+        let data = [];
+        const recentData = json.slice(0, 4);
+        recentData.map((item) => {
+          data.push({
+            identifier: item.identifier,
+            title: item.title,
+            kategori: item.keywords,
+            image: `${config.host}/gsassets/thumbnails/` + item.identifier.replace(/\:/,'-') + '.png',
+            author: item.workspace,
+          });
         });
+        setLoading(false);
+        setData(data);
       });
-      setData(data);
-    });
-
+  }
   if (isLoading) {
     return (
-      <div className="dataset-terbaru" style={{ textAlign: "center" }}>
+      <div className="dataset-terbaru">
         <PropagateLoader
           className={{
             width: 1,
@@ -53,7 +58,7 @@ export const DatasetTerbaru = () => {
         </h2>
         <div className="dataset-terbaru__list">
           {data.map((item) => (
-            <div className="dataset-terbaru__list__item">
+            <div key={item.identifier} className="dataset-terbaru__list__item">
               <Dataset {...item} />
             </div>
           ))}
