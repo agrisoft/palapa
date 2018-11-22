@@ -2,7 +2,9 @@ import React, { useState  } from 'react';
 import { NavLink } from "react-router-dom";
 import './index.scss';
 
-const Header = () => {
+const Header = ({
+  organization = ''
+}) => {
   const [isNavActive, setNavActive] = useState(false);
   let headerClassName = 'header';
   if (isNavActive) {
@@ -14,7 +16,7 @@ const Header = () => {
       <div className="container">
         <div className="header__logo">
           <img src="/assets/images/logo.png" alt="" />
-          <h1>Geoportal Demo BIG</h1>
+          <h1>{`Geoportal ${organization}`}</h1>
           <div
             className="header__nav-handle"
             onClick={() => setNavActive(!isNavActive)}
