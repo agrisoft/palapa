@@ -8,7 +8,7 @@ import dataKategori from './data/kategori.json';
 import dataDataset from './data/dataset.json';
 import './index.scss';
 
-const Pencarian = () => {
+const Pencarian = ({ dataSettings = {} }) => {
   return (
     <div className="pencarian">
       <div className="pencarian__banner">
@@ -79,7 +79,7 @@ const Pencarian = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer dataSettings={dataSettings} />
     </div>
   );
 };
