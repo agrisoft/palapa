@@ -13,10 +13,26 @@ import 'simple-line-icons/css/simple-line-icons.css'
 import dataWeb from './data/web.json';
 import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
-import { useMedia } from './helpers/use-media';
+import { useMedia } from '../../helpers/use-media';
 import config from '../../config';
 
 export const Home = () => {
+  const [dataSettings, setDataSettings] = useState({});
+  const [isLoadingSettings, setLoadingSettings] = useState(true);
+  const [isFetchedSettings, setFetchedSettings] = useState(false);
+  if (!isFetchedSettings) {
+    setFetchedSettings(true);
+    fetch(`${config.api}/sisteminfo`)
+      .then(res => res.json())
+      .then(json => {
+        setLoadingSettings(false);
+        setDataSettings({
+          organization: json.organization,
+          image: json.logo,
+        });
+      });
+  }
+
   const [dataInstansi, setDataInstansi] = useState([]);
   const [isLoadingInstansi, setLoadingInstansi] = useState(true);
   const [isFetchedInstansi, setFetchedInstansi] = useState(false);

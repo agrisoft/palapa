@@ -2,25 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
 import PropagateLoader from 'react-spinners/PropagateLoader';
 
+import { useMedia } from '../../../../helpers/use-media';
 import './index.scss';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-
-function useMedia(query) {
-  const [matches, setMatches] = useState(window.matchMedia(query).matches);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    if (media.matches !== matches) {
-      setMatches(media.matches);
-    }
-    const listener = () => setMatches(media.matches);
-    media.addListener(listener);
-    return () => media.removeListener(listener);
-  }, [query]);
-
-  return matches;
-}
 
 export const LinkCarousel = ({ title, data, isLoading }) => {
   if (isLoading) {

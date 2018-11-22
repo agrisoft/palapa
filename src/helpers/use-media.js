@@ -17,3 +17,4 @@ export const useMedia = (query) => {
 };
 
 export default useMedia;
+
