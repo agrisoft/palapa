@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 import './index.scss';
 
 const Header = ({
-  organization = ''
+  organization = '',
+  logo = ''
 }) => {
   const [isNavActive, setNavActive] = useState(false);
   let headerClassName = 'header';
@@ -15,7 +16,7 @@ const Header = ({
     <div className={headerClassName}>
       <div className="container">
         <div className="header__logo">
-          <img src="/assets/images/logo.png" alt="" />
+          <img src={logo} alt="" />
           <h1>{`Geoportal ${organization}`}</h1>
           <div
             className="header__nav-handle"

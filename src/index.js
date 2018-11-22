@@ -22,7 +22,18 @@ const App = () => {
         setLoadingSettings(false);
         setDataSettings({
           organization: json.organization,
-          image: json.logo,
+          logo: json.logo,
+          tentangkami: json.tentangkami,
+          address: [
+            json.address,
+            json.city,
+            json.postalcode,
+            json.administrativearea,
+            json.country
+          ].join(', '),
+          email: json.email,
+          phone: json.phone,
+          fax: json.fax
         });
       });
   }
@@ -37,11 +48,12 @@ const App = () => {
     <Router>
       <div className={className}>
         <Header
+          logo={dataSettings.logo}
           organization={dataSettings.organization}
         />
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={() => <Home dataSettings={dataSettings} />} />
         <Route path="/jelajah/" component={Jelajah} />
-        <Route path="/pencarian/" component={Pencarian} />
+        <Route path="/pencarian/" component={() => <Pencarian dataSettings={dataSettings} />} />
       </div>
     </Router>
   );

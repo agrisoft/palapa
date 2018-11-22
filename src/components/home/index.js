@@ -16,7 +16,7 @@ import dataKategori from './data/kategori.json';
 import { useMedia } from '../../helpers/use-media';
 import config from '../../config';
 
-export const Home = () => {
+export const Home = ({ dataSettings = {} }) => {
   const [dataBanner, setDataBanner] = useState([]);
   const [isLoadingBanner, setLoadingBanner] = useState(true);
   const [isFetchedBanner, setFetchedBanner] = useState(false);
@@ -155,7 +155,7 @@ export const Home = () => {
       <LinkCarousel title="Instansi" data={dataInstansi} isLoading={isLoadingInstansi} />
       <LinkCarousel title="Web GIS" data={dataWeb} isLoading={isLoadingWeb} />
       <Berita />
-      <Footer />
+      <Footer dataSettings={dataSettings} />
     </div>
   );
 };
