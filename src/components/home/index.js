@@ -13,7 +13,6 @@ import 'simple-line-icons/css/simple-line-icons.css'
 import dataWeb from './data/web.json';
 import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
-import dataTerbaru from './data/terbaru.json';
 
 function useMedia(query) {
   const [matches, setMatches] = useState(window.matchMedia(query).matches);
@@ -108,7 +107,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <DatasetTerbaru data={dataTerbaru.data} />
+      <DatasetTerbaru />
       <Kategori data={dataKategori.data} />
       <LinkCarousel title="Instansi" data={dataWalidata.data} />
       <LinkCarousel title="Web GIS" data={dataWeb.data} />
