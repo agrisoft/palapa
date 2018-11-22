@@ -58,7 +58,7 @@ export const LinkCarousel = ({ title, data, isLoading }) => {
             <div key={`carousel-${title}-${index}`} className="link-carousel__item-wrapper">
               <a
                 className="link-carousel__item"
-                href={item.link}
+                href={item.url}
               >
                 <span className="link-carousel__item__logo">
                   <img className="link-carousel__item__image" src={item.image} alt="" />

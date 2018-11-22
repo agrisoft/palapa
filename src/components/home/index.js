@@ -48,6 +48,7 @@ export const Home = ({ dataSettings = {} }) => {
           data.push({
             label: item.organization,
             image: item.logo,
+            url: '#'
           });
           return true;
         });
@@ -69,6 +70,7 @@ export const Home = ({ dataSettings = {} }) => {
           data.push({
             label: item.nama,
             image: item.image,
+            url: item.url
           });
           return true;
         });
