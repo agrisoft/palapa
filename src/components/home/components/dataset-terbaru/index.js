@@ -22,9 +22,10 @@ export const DatasetTerbaru = () => {
             identifier: item.identifier,
             title: item.title,
             kategori: item.keywords,
-            image: `${config.host}/gsassets/thumbnails/` + item.identifier.replace(/\:/,'-') + '.png',
+            image: `${config.host}/gsassets/thumbnails/` + item.identifier.replace(/:/,'-') + '.png',
             author: item.workspace,
           });
+          return true;
         });
         setLoading(false);
         setData(data);

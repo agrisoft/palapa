@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Map, TileLayer, ZoomControl } from 'react-leaflet';
 import Select from 'react-select';
 
@@ -10,7 +10,6 @@ import { DatasetTerbaru } from './components/dataset-terbaru';
 import { Footer } from '../../library/footer';
 import './index.scss';
 import 'simple-line-icons/css/simple-line-icons.css'
-import dataWeb from './data/web.json';
 import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
 import { useMedia } from '../../helpers/use-media';
@@ -18,20 +17,17 @@ import config from '../../config';
 
 export const Home = ({ dataSettings = {} }) => {
   const [dataBanner, setDataBanner] = useState([]);
-  const [isLoadingBanner, setLoadingBanner] = useState(true);
   const [isFetchedBanner, setFetchedBanner] = useState(false);
   if (!isFetchedBanner) {
     setFetchedBanner(true);
     fetch(`${config.api}/frontend`)
       .then(res => res.json())
       .then(json => {
-        setLoadingBanner(false);
         let images = [];
         if (json[0].image_1) images.push(json[0].image_1);
         if (json[0].image_2) images.push(json[0].image_2);
         if (json[0].image_3) images.push(json[0].image_3);
         if (json[0].image_4) images.push(json[0].image_4);
-        console.log('images',images);
         setDataBanner({
           tagline: json[0].remark_1,
           images
@@ -53,6 +49,7 @@ export const Home = ({ dataSettings = {} }) => {
             label: item.organization,
             image: item.logo,
           });
+          return true;
         });
         setLoadingInstansi(false);
         setDataInstansi(data);
@@ -71,8 +68,9 @@ export const Home = ({ dataSettings = {} }) => {
         json.map((item) => {
           data.push({
             label: item.nama,
-            image: item.logo,
+            image: item.image,
           });
+          return true;
         });
         setLoadingWeb(false);
         setDataWeb(data);

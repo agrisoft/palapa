@@ -22,6 +22,7 @@ export const Berita = () => {
             date: item.tanggal,
             content: item.stripped || '',
           });
+          return true;
         });
         setLoading(false);
         setData(data);
@@ -55,8 +56,8 @@ export const Berita = () => {
         </h2>
         <div className="berita__items">
           <div className="berita__items__wrapper">
-            {data.map((item) => (
-              <div className="berita__item">
+            {data.map((item, index) => (
+              <div key={`berita-${index}`} className="berita__item">
                 <h4 className="berita__item__tanggal">{item.date}</h4>
                 <h3 className="berita__item__title">{item.title}</h3>
                 <p>{item.content}</p>

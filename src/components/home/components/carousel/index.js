@@ -18,8 +18,8 @@ const settings = {
 export const Carousel = ({images = []}) => (
   <div className="carousel">
     <Slider {...settings}>
-      {images.map((image) => (
-        <div>
+      {images.map((image, index) => (
+        <div key={`carousel-${index}`}>
           <div className="carousel__image" style={{ backgroundImage: 'url("' + image + '")' }} />
         </div>
       ))}

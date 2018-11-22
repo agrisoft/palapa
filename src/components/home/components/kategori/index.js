@@ -22,6 +22,7 @@ export const Kategori = () => {
             label: item.keywords,
             image: item.logo
           });
+          return true;
         });
         setLoading(false);
         setData(data);

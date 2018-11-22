@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route  } from "react-router-dom";
 import Header from './library/header';
@@ -12,14 +12,12 @@ import config from './config';
 
 const App = () => {
   const [dataSettings, setDataSettings] = useState({});
-  const [isLoadingSettings, setLoadingSettings] = useState(true);
   const [isFetchedSettings, setFetchedSettings] = useState(false);
   if (!isFetchedSettings) {
     setFetchedSettings(true);
     fetch(`${config.api}/sisteminfo`)
       .then(res => res.json())
       .then(json => {
-        setLoadingSettings(false);
         setDataSettings({
           organization: json.organization,
           logo: json.logo,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Map, TileLayer, ZoomControl } from 'react-leaflet';
 import { Carousel } from './components/carousel';
 import { Footer } from '../../library/footer';

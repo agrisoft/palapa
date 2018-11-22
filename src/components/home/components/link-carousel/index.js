@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Slider from "react-slick";
 import PropagateLoader from 'react-spinners/PropagateLoader';
 
@@ -54,8 +54,8 @@ export const LinkCarousel = ({ title, data, isLoading }) => {
           {title}
         </h2>
         <Slider {...settings}>
-          {data.map((item) => (
-            <div className="link-carousel__item-wrapper">
+          {data.map((item, index) => (
+            <div key={`carousel-${title}-${index}`} className="link-carousel__item-wrapper">
               <a
                 className="link-carousel__item"
                 href={item.link}

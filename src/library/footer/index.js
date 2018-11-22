@@ -20,11 +20,11 @@ export const Footer = ({ dataSettings = {}}) => {
         <div className="footer__didukung">
           <h3 className="footer__header">Didukung Oleh</h3>
           <div className="footer__logo">
-            <a className="footer__logo__item" href="#">
+            <a className="footer__logo__item" href="/">
               <img src="/assets/images/logo-big.png" alt="BIG" />
             </a>
-            <a className="footer__logo__item" href="#">
-              <img src={dataSettings.logo} />
+            <a className="footer__logo__item" href="/">
+              <img src={dataSettings.logo} alt="" />
             </a>
           </div>
         </div>
