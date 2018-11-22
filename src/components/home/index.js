@@ -17,18 +17,24 @@ import { useMedia } from '../../helpers/use-media';
 import config from '../../config';
 
 export const Home = () => {
-  const [dataSettings, setDataSettings] = useState({});
-  const [isLoadingSettings, setLoadingSettings] = useState(true);
-  const [isFetchedSettings, setFetchedSettings] = useState(false);
-  if (!isFetchedSettings) {
-    setFetchedSettings(true);
-    fetch(`${config.api}/sisteminfo`)
+  const [dataBanner, setDataBanner] = useState([]);
+  const [isLoadingBanner, setLoadingBanner] = useState(true);
+  const [isFetchedBanner, setFetchedBanner] = useState(false);
+  if (!isFetchedBanner) {
+    setFetchedBanner(true);
+    fetch(`${config.api}/frontend`)
       .then(res => res.json())
       .then(json => {
-        setLoadingSettings(false);
-        setDataSettings({
-          organization: json.organization,
-          image: json.logo,
+        setLoadingBanner(false);
+        let images = [];
+        if (json[0].image_1) images.push(json[0].image_1);
+        if (json[0].image_2) images.push(json[0].image_2);
+        if (json[0].image_3) images.push(json[0].image_3);
+        if (json[0].image_4) images.push(json[0].image_4);
+        console.log('images',images);
+        setDataBanner({
+          tagline: json[0].remark_1,
+          images
         });
       });
   }
@@ -99,16 +105,12 @@ export const Home = () => {
   return (
     <div className="home">
       <div className="banner">
-        <Carousel />
+        <Carousel images={dataBanner.images} />
         <div className="banner__overlay" />
       </div>
       <div className="home__search">
         <div className="container">
-          <p className="home__search__intro">
-              Geoportal PALAPA merupakan salah satu simpul Jaringan Informasi Geospasial Nasional (JIGN). 
-              Data dan informasi geospasial disediakan dalam bentuk GIS web services dan dapat ditelusuri 
-              keberadaan datanya.
-          </p>
+          <p className="home__search__intro">{dataBanner.tagline}</p>
           <div className={searchClassName}>
             <span
               className="search__advanced-link"
