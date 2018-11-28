@@ -2,34 +2,31 @@ import React from 'react';
 import Slider from "react-slick";
 import PropagateLoader from 'react-spinners/PropagateLoader';
 
-import { useMedia } from '../../../../helpers/use-media';
 import './index.scss';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-export const LinkCarousel = ({ title, data, isLoading }) => {
-  if (isLoading) {
+export const LinkCarousel = ({
+  title,
+  data,
+  isSmall,
+  isMedium
+}) => {
+  if (data === null) {
     return (
-      <div className="dataset-terbaru">
-        <PropagateLoader
-          className={{
-            width: 1,
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-          sizeUnit={"px"}
-          size={10}
-          color={'#e87171'}
-          loading={true}
-        />
+      <div className="link-carousel">
+        <div className="link-carousel__loading">
+          <PropagateLoader
+            sizeUnit={"px"}
+            size={10}
+            color={'#e87171'}
+            loading={true}
+          />
+        </div>
       </div>
     );
   }
   if (data.length < 1) return null;
-
-  const isSmall = useMedia("(max-width: 760px)");
-  const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
 
   let numItems = 6;
   if (isSmall) numItems = 4;

@@ -1,48 +1,19 @@
-import React, { useState } from 'react';
-import fetch from 'node-fetch';
+import React from 'react';
 import PropagateLoader from 'react-spinners/PropagateLoader';
-import config from '../../../../config';
 import './index.scss';
 
-export const Berita = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-  const [isFetched, setFetched] = useState(false);
-
-  if (!isFetched) {
-    setFetched(true);
-    fetch(`${config.api}/berita/list`)
-      .then(res => res.json())
-      .then(json => {
-        let data = [];
-        const recentData = json.slice(0, 3);
-        recentData.map((item) => {
-          data.push({
-            title: item.judul,
-            date: item.tanggal,
-            content: item.stripped || '',
-          });
-          return true;
-        });
-        setLoading(false);
-        setData(data);
-      });
-  }
-  if (isLoading) {
+export const Berita = ({ data }) => {
+  if (data === null) {
     return (
       <div className="berita">
-        <PropagateLoader
-          className={{
-            width: 1,
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-          sizeUnit={"px"}
-          size={10}
-          color={'#e87171'}
-          loading={true}
-        />
+        <div className="berita__loading">
+          <PropagateLoader
+            sizeUnit={"px"}
+            size={10}
+            color={'#e87171'}
+            loading={true}
+          />
+        </div>
       </div>
     );
   }

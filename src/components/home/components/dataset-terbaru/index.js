@@ -1,51 +1,21 @@
-import React, { useState } from 'react';
-import fetch from 'node-fetch';
+import React from 'react';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 import Dataset from '../../../../library/dataset';
 import './index.scss';
-import config from '../../../../config';
 
-export const DatasetTerbaru = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-  const [isFetched, setFetched] = useState(false);
-
-  if (!isFetched) {
-    setFetched(true);
-    fetch(`${config.api}/listmetalayer`)
-      .then(res => res.json())
-      .then(json => {
-        let data = [];
-        const recentData = json.slice(0, 4);
-        recentData.map((item) => {
-          data.push({
-            identifier: item.identifier,
-            title: item.title,
-            kategori: item.keywords,
-            image: `${config.host}/gsassets/thumbnails/` + item.identifier.replace(/:/,'-') + '.png',
-            author: item.workspace,
-          });
-          return true;
-        });
-        setLoading(false);
-        setData(data);
-      });
-  }
-  if (isLoading) {
+export const DatasetTerbaru = ({ data }) => {
+  if (data === null) {
     return (
       <div className="dataset-terbaru">
-        <PropagateLoader
-          className={{
-            width: 1,
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-          sizeUnit={"px"}
-          size={10}
-          color={'#e87171'}
-          loading={true}
-        />
+        <div className="dataset-terbaru__loading">
+          <PropagateLoader
+            className="dataset-terbaru__loading"
+            sizeUnit={"px"}
+            size={10}
+            color={'#e87171'}
+            loading={true}
+          />
+        </div>
       </div>
     );
   }

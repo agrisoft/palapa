@@ -5,6 +5,10 @@
   & .container {
     position: relative;
   }
+  &__loading {
+    width: 1px;
+    margin: 0 auto;
+  }
   &__header {
     position: absolute;
     transform-origin: top left;

@@ -1,48 +1,19 @@
-import React, { useState } from 'react';
-import fetch from 'node-fetch';
+import React from 'react';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 import './index.scss';
-import config from '../../../../config';
 
-export const Kategori = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-  const [isFetched, setFetched] = useState(false);
-
-  if (!isFetched) {
-    setFetched(true);
-    fetch(`${config.api}/jumlahdataset`)
-      .then(res => res.json())
-      .then(json => {
-        let data = [];
-        const recentData = json.slice(0, 4);
-        recentData.map((item) => {
-          data.push({
-            link: '#',
-            label: item.keywords,
-            image: item.logo
-          });
-          return true;
-        });
-        setLoading(false);
-        setData(data);
-      });
-  }
-  if (isLoading) {
+export const Kategori = ({ data }) => {
+  if (data === null) {
     return (
-      <div className="kategori kategori-loading">
-        <PropagateLoader
-          className={{
-            width: 1,
-            display: 'block',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-          sizeUnit={"px"}
-          size={10}
-          color={'#fff'}
-          loading={true}
-        />
+      <div className="kategori ">
+        <div className="kategori__loading">
+          <PropagateLoader
+            sizeUnit={"px"}
+            size={10}
+            color={'#fff'}
+            loading={true}
+          />
+        </div>
       </div>
     );
   }

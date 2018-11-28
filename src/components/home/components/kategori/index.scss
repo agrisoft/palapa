@@ -4,8 +4,11 @@
   color: #fff;
   background: #4E77A7;
 
-  &-loading {
+  &__loading {
     padding-bottom: 70px;
+    width: 1px;
+    display: block;
+    margin: 0 auto;
   }
 
   &__header {

@@ -2,6 +2,12 @@
   padding: 60px 0;
   border-top: 2px solid #fff;
 
+  &__loading {
+    width: 1px;
+    display: block;
+    margin: 0 auto;
+  }
+
   &__header {
     position: absolute;
     transform-origin: top left;
