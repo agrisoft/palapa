@@ -2,8 +2,9 @@ import { useState } from 'react';
 import config from '../../../config';
 
 let isFetching = false;
+let storedData = null;
 export const fetchWeb = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(storedData);
   if (!isFetching) {
     isFetching = true;
     fetch(`${config.api}/linkweb/list`)
@@ -18,6 +19,7 @@ export const fetchWeb = () => {
           });
           return true;
         });
+        storedData = data;
         setData(data);
       });
   }

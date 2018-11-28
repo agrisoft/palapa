@@ -2,8 +2,9 @@ import { useState } from 'react';
 import config from '../../../config';
 
 let isFetching = false;
+let storedData = null;
 export const fetchDatasetTerbaru = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(storedData);
   if (!isFetching) {
     isFetching = true;
     fetch(`${config.api}/listmetalayer`)
@@ -21,6 +22,7 @@ export const fetchDatasetTerbaru = () => {
           });
           return true;
         });
+        storedData = data;
         setData(data);
       });
   }

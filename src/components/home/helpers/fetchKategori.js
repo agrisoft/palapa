@@ -2,8 +2,9 @@ import { useState } from 'react';
 import config from '../../../config';
 
 let isFetching = false;
+let storedData = null;
 export const fetchKategori = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(storedData);
   if (!isFetching) {
     isFetching = true;
     fetch(`${config.api}/jumlahdataset`)
@@ -19,6 +20,7 @@ export const fetchKategori = () => {
           });
           return true;
         });
+        storedData = data;
         setData(data);
       });
   }

@@ -2,8 +2,9 @@ import { useState } from 'react';
 import config from '../../../config';
 
 let isFetching = false;
+let storedData = null;
 export const fetchInstansi = () => {
-  const [dataInstansi, setDataInstansi] = useState(null);
+  const [dataInstansi, setDataInstansi] = useState(storedData);
   if (!isFetching) {
     isFetching = true;
     fetch(`${config.api}/group/listl`)
@@ -18,6 +19,7 @@ export const fetchInstansi = () => {
           });
           return true;
         });
+        storedData = data;
         setDataInstansi(data);
       });
   }
