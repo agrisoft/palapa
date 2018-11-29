@@ -61,6 +61,24 @@
       background: #555;
     }
   }
+  &__metadata {
+    &__header {
+      width: 100%;
+      overflow: hidden;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+    &__title {
+      float: left;
+      margin: 0;
+      padding: 0;
+    }
+    &__close {
+      float: right;
+      cursor: pointer;
+    }
+  }
 }
 .layout-small {
   .dataset {
