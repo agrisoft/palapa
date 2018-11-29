@@ -16,6 +16,7 @@ export const fetchDatasetTerbaru = () => {
           data.push({
             identifier: item.identifier,
             title: item.title,
+            downloadable: item.downloadable,
             kategori: item.keywords,
             image: `${config.host}/gsassets/thumbnails/` + item.identifier.replace(/:/,'-') + '.png',
             author: item.workspace,

@@ -14,7 +14,8 @@ export const Dataset = ({
   kategori,
   author,
   image,
-  identifier
+  identifier,
+  downloadable
 }) => {
   const [isMetadataOpen, setIsMetadataOpen] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
@@ -49,7 +50,17 @@ export const Dataset = ({
         setIsMapOpen(true);
       });
   };
-
+  let downloadIcon = null;
+  if (downloadable === 'Y') {
+    downloadIcon = (
+      <a
+        href={`${config.dowloadWfs}${identifier}&outputFormat=shape-zip`}
+        className="dataset__actions-download"
+      >
+        <span className="icon-cloud-download" />
+      </a>
+    );
+  }
   return (
     <div>
       <Modal
@@ -107,9 +118,7 @@ export const Dataset = ({
           >
             <span className="icon-info" />
           </a>
-          <a href="#download" className="dataset__actions-download">
-            <span className="icon-cloud-download" />
-          </a>
+          {downloadIcon}
         </div>
         <div className="dataset__image-wrapper">
           <img className="dataset__image" src={image} alt="" />
