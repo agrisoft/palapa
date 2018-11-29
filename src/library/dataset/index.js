@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import get from 'lodash/get';
+import { Map, TileLayer, WMSTileLayer, ZoomControl } from 'react-leaflet';
 import config from '../../config';
 import './index.scss';
 import { MetadataPanel } from './components/metadata-panel';
@@ -14,8 +16,10 @@ export const Dataset = ({
   image,
   identifier
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMetadataOpen, setIsMetadataOpen] = useState(false);
+  const [isMapOpen, setIsMapOpen] = useState(false);
   const [metadata, setMetadata] = useState([]);
+  const [mapCenter, setMapCenter] = useState([ -6.175985, 106.827313 ]);
 
   const getMetadata = () => {
     fetch(`${config.host}/csw?service=CSW&version=2.0.2&request=GetRecordById&ElementSetName=full&Id=${identifier}&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/json`)
@@ -23,17 +27,63 @@ export const Dataset = ({
       .then(json => {
         const metadata = mappingMetadata(json);
         setMetadata(metadata);
-        setIsOpen(true);
+        setIsMetadataOpen(true);
       });
   };
+
+  const openMap = () => {
+    fetch(`${config.host}/csw?service=CSW&version=2.0.2&request=GetRecordById&ElementSetName=full&Id=${identifier}&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/json`)
+      .then(res => res.json())
+      .then(json => {
+        const base = 'csw:GetRecordByIdResponse.gmd:MD_Metadata.gmd:identificationInfo.gmd:MD_DataIdentification.';
+        const extent = [
+          parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:westBoundLongitude.gco:Decimal`)),
+          parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:eastBoundLongitude.gco:Decimal`)),
+          parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:southBoundLatitude.gco:Decimal`)),
+          parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:northBoundLatitude.gco:Decimal`))
+        ];
+        setMapCenter([
+          (extent[2] + extent[3]) / 2,
+          (extent[0] + extent[1]) / 2,
+        ]);
+        setIsMapOpen(true);
+      });
+  };
+
   return (
     <div>
       <Modal
-        isOpen={isOpen}
+        isOpen={isMapOpen}
+        onRequestClose={() => setIsMapOpen(false)}
+      >
+        <div className="dataset__map">
+          <div className="dataset__map__header">
+            <h3 className="dataset__map__title">{title}</h3>
+            <span className="dataset__map__close" onClick={() => setIsMapOpen(false)}>
+              <span className="icon-close" />
+            </span>
+          </div>
+          <Map center={mapCenter} zoom={12} zoomControl={false}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <WMSTileLayer
+              layers={identifier}
+              url={config.wms}
+              transparent
+              format="image/png"
+            />
+            <ZoomControl position="topleft" />
+          </Map>
+        </div>
+      </Modal>
+      <Modal
+        isOpen={isMetadataOpen}
+        onRequestClose={() => setIsMetadataOpen(false)}
       >
         <div className="dataset__metadata__header">
           <h3 className="dataset__metadata__title">{title}</h3>
-          <span className="dataset__metadata__close" onClick={() => setIsOpen(false)}>
+          <span className="dataset__metadata__close" onClick={() => setIsMetadataOpen(false)}>
             <span className="icon-close" />
           </span>
         </div>
@@ -43,7 +93,11 @@ export const Dataset = ({
       </Modal>
       <div className="dataset">
         <div className="dataset__actions">
-          <a href="#map" className="dataset__actions-map">
+          <a
+            href="#map"
+            className="dataset__actions-map"
+            onClick={() => openMap()}
+          >
             <span className="icon-map" />
           </a>
           <a
