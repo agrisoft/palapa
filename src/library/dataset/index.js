@@ -121,6 +121,7 @@ export const Dataset = ({
           {downloadIcon}
         </div>
         <div className="dataset__image-wrapper">
+          <span className="dataset__image-aligner" />
           <img className="dataset__image" src={image} alt="" />
         </div>
         <div className="dataset__title">{title}</div>
