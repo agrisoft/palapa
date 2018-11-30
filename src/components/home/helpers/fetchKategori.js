@@ -11,8 +11,7 @@ export const fetchKategori = () => {
       .then(res => res.json())
       .then(json => {
         let data = [];
-        const recentData = json.slice(0, 4);
-        recentData.map((item) => {
+        json.map((item) => {
           data.push({
             link: '#',
             label: item.keywords,
