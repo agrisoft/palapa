@@ -58,6 +58,7 @@ export const LinkCarousel = ({
                 href={item.url}
               >
                 <span className="link-carousel__item__logo">
+                  <span className="link-carousel__item__image-aligner" />
                   <img className="link-carousel__item__image" src={item.image} alt="" />
                 </span>
                 <span className="link-carousel__item__label">{item.label}</span>
