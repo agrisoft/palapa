@@ -29,11 +29,9 @@
   }
   &__items__wrapper {
     margin-left: -40px;
-    text-align: center;
   }
   &__item {
-    display: inline-block;
-    text-align: left;
+    float: left;
     width: 360px;
     margin-left: 40px;
     &__tanggal {
