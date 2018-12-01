@@ -3,7 +3,7 @@ import { Map, TileLayer, ZoomControl } from 'react-leaflet';
 import Header from '../../library/header';
 import { useMedia } from '../../helpers/use-media';
 import './index.css';
-import { fetchSettings } from '../../helpers/fetchSettings';
+import { fetchSettings } from './helpers/fetchSettings';
 
 const Jelajah = () => {
   const [height, setHeight] = useState(window.innerHeight);

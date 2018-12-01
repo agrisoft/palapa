@@ -8,8 +8,8 @@ import dataWalidata from './data/walidata.json';
 import dataKategori from './data/kategori.json';
 import dataDataset from './data/dataset.json';
 import { useMedia } from '../../helpers/use-media';
+import { fetchSettings } from '../../helpers/fetchSettings';
 import './index.scss';
-import { fetchSettings } from './helpers/fetchSettings';
 
 const Pencarian = () => {
   const dataSettings = fetchSettings();

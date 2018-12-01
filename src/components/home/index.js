@@ -14,7 +14,7 @@ import 'simple-line-icons/css/simple-line-icons.css'
 import dataWalidataTmp from './data/walidata.json';
 import dataKategoriTmp from './data/kategori.json';
 import { useMedia } from '../../helpers/use-media';
-import { fetchSettings } from './helpers/fetchSettings';
+import { fetchSettings } from '../../helpers/fetchSettings';
 import { fetchBanners } from './helpers/fetchBanners';
 import { fetchDatasetTerbaru } from './helpers/fetchDatasetTerbaru';
 import { fetchKategori } from './helpers/fetchKategori';
