@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import config from '../../../config';
+import config from '../config';
 
 let isFetching = false;
 let storedData = null;
-export const fetchDatasetTerbaru = () => {
+export const fetchDataset = () => {
   const [data, setData] = useState(storedData);
   if (!isFetching) {
     isFetching = true;
@@ -11,8 +11,7 @@ export const fetchDatasetTerbaru = () => {
       .then(res => res.json())
       .then(json => {
         let data = [];
-        const recentData = json.slice(0, 4);
-        recentData.map((item) => {
+        json.map((item) => {
           data.push({
             identifier: item.identifier,
             title: item.title,
@@ -30,4 +29,4 @@ export const fetchDatasetTerbaru = () => {
   return data;
 };
 
-export default fetchDatasetTerbaru;
+export default fetchDataset;
