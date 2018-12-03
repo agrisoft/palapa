@@ -6,7 +6,7 @@ import './index.scss';
 import { fetchSettings } from '../../helpers/fetchSettings';
 import { fetchBerita } from '../../helpers/fetchBerita';
 
-const Jelajah = ({ match }) => {
+const Berita = ({ match }) => {
   const dataSettings = fetchSettings();
   const dataBerita = fetchBerita();
   const isSmall = useMedia("(max-width: 760px)");
@@ -54,4 +54,4 @@ const Jelajah = ({ match }) => {
   );
 };
 
-export default Jelajah;
+export default Berita;
