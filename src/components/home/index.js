@@ -11,8 +11,6 @@ import { Berita } from './components/berita';
 import { Footer } from '../../library/footer';
 import './index.scss';
 import 'simple-line-icons/css/simple-line-icons.css'
-import dataWalidataTmp from './data/walidata.json';
-import dataKategoriTmp from './data/kategori.json';
 import { useMedia } from '../../helpers/use-media';
 import { fetchSettings } from '../../helpers/fetchSettings';
 import { fetchBerita } from '../../helpers/fetchBerita';
@@ -31,6 +29,8 @@ export const Home = ({ history }) => {
   const dataInstansi = fetchInstansi();
   const dataWeb = fetchWeb();
   const dataBerita = fetchBerita();
+  console.log('dataKategori', dataKategori);
+  console.log('dataInstansi', dataInstansi);
 
   const [isAdvanceActive, setAdvanceActive] = useState(false);
   const isSmall = useMedia("(max-width: 760px)");
@@ -89,10 +89,10 @@ export const Home = ({ history }) => {
               </span>
               <div className="search__select-wrapper">
                 <div className="search__select-kategori">
-                  <Select placeholder="Semua Kategori" options={dataKategoriTmp.data} styles={selectColorStyles} />
+                  <Select placeholder="Semua Kategori" options={dataKategori || []} styles={selectColorStyles} />
                 </div>
                 <div className="search__select-walidata">
-                  <Select placeholder="Semua Instansi" options={dataWalidataTmp.data} styles={selectColorStyles} />
+                  <Select placeholder="Semua Instansi" options={dataInstansi || []} styles={selectColorStyles} />
                 </div>
               </div>
               <span className="search__input-wrapper">

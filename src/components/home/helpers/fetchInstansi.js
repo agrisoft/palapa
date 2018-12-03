@@ -14,6 +14,7 @@ export const fetchInstansi = () => {
         json.map((item) => {
           data.push({
             label: item.organization,
+            value: item.organization,
             image: item.logo,
             url: '#'
           });

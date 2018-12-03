@@ -15,6 +15,7 @@ export const fetchKategori = () => {
           data.push({
             link: '#',
             label: item.keywords,
+            value: item.keywords,
             image: item.logo
           });
           return true;
