@@ -1,10 +1,17 @@
 .detail-berita {
   position: relative;
-  padding-bottom: 50px;
+  padding: 50px 0;
+  font-size: 14px;
   &__title {
     margin: 0;
-    padding: 50px 0 20px;
-    font-size: 24px;
+    padding: 0 0 20px;
+    font-size: 20px;
+  }
+  &__date {
+    margin: 0;
+    padding: 0 0 10px;
+    font-size: 14px;
+    color: #666;
   }
   p {
     background: transparent !important;

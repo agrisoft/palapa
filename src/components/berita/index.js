@@ -44,6 +44,7 @@ const Jelajah = ({ match }) => {
       />
       <div className="detail-berita">
         <div className="container">
+          <h5 className="detail-berita__date">{detailBerita.date}</h5>
           <h2 className="detail-berita__title">{detailBerita.title}</h2>
           <div dangerouslySetInnerHTML={{__html: detailBerita.full}} />
         </div>
