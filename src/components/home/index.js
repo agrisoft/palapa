@@ -15,9 +15,9 @@ import { useMedia } from '../../helpers/use-media';
 import { fetchSettings } from '../../helpers/fetchSettings';
 import { fetchBerita } from '../../helpers/fetchBerita';
 import { fetchDataset } from '../../helpers/fetchDataset';
-import { fetchBanners } from './helpers/fetchBanners';
-import { fetchKategori } from './helpers/fetchKategori';
-import { fetchInstansi } from './helpers/fetchInstansi';
+import { fetchKategori } from '../../helpers/fetchKategori';
+import { fetchInstansi } from '../../helpers/fetchInstansi';
+import { fetchBanners } from '../../helpers/fetchBanners';
 import { fetchWeb } from './helpers/fetchWeb';
 
 export const Home = ({ history }) => {
@@ -29,8 +29,6 @@ export const Home = ({ history }) => {
   const dataInstansi = fetchInstansi();
   const dataWeb = fetchWeb();
   const dataBerita = fetchBerita();
-  console.log('dataKategori', dataKategori);
-  console.log('dataInstansi', dataInstansi);
 
   const [isAdvanceActive, setAdvanceActive] = useState(false);
   const isSmall = useMedia("(max-width: 760px)");
