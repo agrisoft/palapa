@@ -1,5 +1,5 @@
 import React, { useState  } from 'react';
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import './index.scss';
 
 const Header = ({
@@ -16,8 +16,8 @@ const Header = ({
     <div className={headerClassName}>
       <div className="container">
         <div className="header__logo">
-          <img src={logo} alt="" />
-          <h1>{`Geoportal ${organization}`}</h1>
+          <Link to={`/`}><img src={logo} alt="" /></Link>
+          <h1><Link to={`/`}>{`Geoportal ${organization}`}</Link></h1>
           <div
             className="header__nav-handle"
             onClick={() => setNavActive(!isNavActive)}

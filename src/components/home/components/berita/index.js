@@ -2,7 +2,7 @@ import React from 'react';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 import './index.scss';
 
-export const Berita = ({ data }) => {
+export const Berita = ({ data, clickHandler }) => {
   if (data === null) {
     return (
       <div className="berita">
@@ -30,7 +30,16 @@ export const Berita = ({ data }) => {
             {data.map((item, index) => (
               <div key={`berita-${index}`} className="berita__item">
                 <h4 className="berita__item__tanggal">{item.date}</h4>
-                <h3 className="berita__item__title">{item.title}</h3>
+                <h3
+                  className="berita__item__title"
+                  onClick={() => {
+                    clickHandler(item.id);
+                    window.scrollTo(0, 0);
+                    return false;
+                  }}
+                >
+                  {item.title}
+                </h3>
                 <p>{item.content}</p>
               </div>
             ))}

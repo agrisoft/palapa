@@ -15,14 +15,14 @@ import dataWalidataTmp from './data/walidata.json';
 import dataKategoriTmp from './data/kategori.json';
 import { useMedia } from '../../helpers/use-media';
 import { fetchSettings } from '../../helpers/fetchSettings';
+import { fetchBerita } from '../../helpers/fetchBerita';
 import { fetchBanners } from './helpers/fetchBanners';
 import { fetchDatasetTerbaru } from './helpers/fetchDatasetTerbaru';
 import { fetchKategori } from './helpers/fetchKategori';
 import { fetchInstansi } from './helpers/fetchInstansi';
 import { fetchWeb } from './helpers/fetchWeb';
-import { fetchBerita } from './helpers/fetchBerita';
 
-export const Home = () => {
+export const Home = ({ history }) => {
   const dataSettings = fetchSettings();
   const dataBanner = fetchBanners();
   const datasetTerbaru = fetchDatasetTerbaru();
@@ -125,7 +125,10 @@ export const Home = () => {
         isSmall={isSmall}
         isMedium={isMedium}
       />
-      <Berita data={dataBerita} />
+      <Berita
+        data={dataBerita}
+        clickHandler={(id) => history.push(`/berita/${id}`)}
+      />
       <Footer dataSettings={dataSettings} />
     </div>
   );

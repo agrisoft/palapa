@@ -41,9 +41,13 @@
       margin: 0;
     }
     &__title {
+      cursor: pointer;
       font-size: 22px;
       font-weight: bold;
       margin: 10px 0 15px;
+      &:hover {
+        text-decoration: underline;
+      }
     }
     & p {
       margin: 0;

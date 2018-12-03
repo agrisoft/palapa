@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import config from '../../../config';
+import config from '../config';
 
 let isFetching = false;
 let storedData = null;
@@ -14,9 +14,11 @@ export const fetchBerita = () => {
         const recentData = json.slice(0, 3);
         recentData.map((item) => {
           data.push({
+            id: item.id,
             title: item.judul,
             date: item.tanggal,
             content: item.stripped || '',
+            full: item.isiberita || '',
           });
           return true;
         });

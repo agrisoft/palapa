@@ -1,27 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Map, TileLayer, ZoomControl } from 'react-leaflet';
+import React  from 'react';
 import Header from '../../library/header';
+import { Footer } from '../../library/footer';
 import { useMedia } from '../../helpers/use-media';
-import './index.css';
-import { fetchSettings } from './helpers/fetchSettings';
+import './index.scss';
+import { fetchSettings } from '../../helpers/fetchSettings';
+import { fetchBerita } from '../../helpers/fetchBerita';
 
-const Jelajah = () => {
-  const [height, setHeight] = useState(window.innerHeight);
-  useEffect(() =>{
-    const handleResize = () => setHeight(window.innerHeight);
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  });
+const Jelajah = ({ match }) => {
   const dataSettings = fetchSettings();
+  const dataBerita = fetchBerita();
   const isSmall = useMedia("(max-width: 760px)");
   const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
+
   let className = '';
   if (isSmall) {
     className = 'layout-small';
   } else if (isMedium) {
     className = 'layout-medium';
+  }
+  if (dataBerita === null)  {
+    return (
+      <div>Loading...</div>
+    );
+  }
+  let detailBerita = {};
+  if (dataBerita) {
+    dataBerita.map((item) => {
+      if (parseInt(item.id) === parseInt(match.params.id)) {
+        detailBerita = item;
+      }
+      return item;
+    });
+  } else {
+    return (
+      <div>No Data.</div>
+    );
   }
   return (
     <div className={className}>
@@ -29,15 +42,13 @@ const Jelajah = () => {
         logo={dataSettings.logo}
         organization={dataSettings.organization}
       />
-      <div className="jelajah" style={{ height }}>
-        <Map center={[ -6.175985, 106.827313 ]} zoom={12} zoomControl={false}>
-          <TileLayer
-            attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <ZoomControl position="topright" />
-        </Map>
+      <div className="detail-berita">
+        <div className="container">
+          <h2 className="detail-berita__title">{detailBerita.title}</h2>
+          <div dangerouslySetInnerHTML={{__html: detailBerita.full}} />
+        </div>
       </div>
+      <Footer dataSettings={dataSettings} />
     </div>
   );
 };
