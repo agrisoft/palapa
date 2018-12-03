@@ -1,6 +1,7 @@
 .berita {
   padding: 60px 0;
   border-top: 2px solid #fff;
+  font-size: 14px;
 
   & .container {
     position: relative;
@@ -35,14 +36,13 @@
     width: 360px;
     margin-left: 40px;
     &__tanggal {
-      font-size: 16px;
       text-transform: uppercase;
       font-weight: 200;
       margin: 0;
     }
     &__title {
       cursor: pointer;
-      font-size: 22px;
+      font-size: 18px;
       font-weight: bold;
       margin: 10px 0 15px;
       &:hover {
@@ -51,7 +51,7 @@
     }
     & p {
       margin: 0;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.7;
     }
   }
