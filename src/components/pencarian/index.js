@@ -2,8 +2,10 @@ import React from 'react';
 import { Map, TileLayer, ZoomControl } from 'react-leaflet';
 import Header from '../../library/header';
 import { Carousel } from './components/carousel';
+import { Kategori } from './components/kategori';
+import { Instansi } from './components/instansi';
+import { ListDataset } from './components/list-dataset';
 import { Footer } from '../../library/footer';
-import { Dataset } from '../../library/dataset';
 import { useMedia } from '../../helpers/use-media';
 import { fetchSettings } from '../../helpers/fetchSettings';
 import { fetchBanners } from '../../helpers/fetchBanners';
@@ -15,9 +17,9 @@ import './index.scss';
 const Pencarian = () => {
   const dataSettings = fetchSettings();
   const dataBanner = fetchBanners();
-  const dataInstansi = fetchInstansi() || [];
-  const dataKategori = fetchKategori() || [];
-  const dataDataset = fetchDataset() || [];
+  const dataInstansi = fetchInstansi();
+  const dataKategori = fetchKategori();
+  const dataDataset = fetchDataset();
   const isSmall = useMedia("(max-width: 760px)");
   const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
   let className = '';
@@ -37,6 +39,7 @@ const Pencarian = () => {
     </div>
   )
   pagination = null;
+
   return (
     <div className={className}>
       <Header
@@ -65,28 +68,8 @@ const Pencarian = () => {
                   <ZoomControl position="topleft" />
                 </Map>
               </div>
-              <h4>Kategori</h4>
-              <ul>
-                {dataKategori.map((item) => {
-                  return (
-                    <li>
-                      <span className="pencarian__filter-item">{item.label}</span>
-                      <span className="pencarian__filter-count">{0}</span>
-                    </li>
-                  )
-                })}
-              </ul>
-              <h4>Instansi</h4>
-              <ul>
-                {dataInstansi.map((item) => {
-                  return (
-                    <li>
-                      <span className="pencarian__filter-item">{item.label}</span>
-                      <span className="pencarian__filter-count">{0}</span>
-                    </li>
-                  )
-                })}
-              </ul>
+              <Kategori data={dataKategori} />
+              <Instansi data={dataInstansi} />
             </div>
           </div>
           <div className="pencarian__content">
@@ -97,11 +80,7 @@ const Pencarian = () => {
               <input type="text" placeholder="Kata Kunci" className="pencarian__input" />
             </div>
             <div className="pencarian__dataset__list">
-              {dataDataset.map((item) => (
-                <div className="pencarian__dataset__list__item">
-                  <Dataset {...item} />
-                </div>
-              ))}
+              <ListDataset data={dataDataset} />
             </div>
            {pagination}
           </div>

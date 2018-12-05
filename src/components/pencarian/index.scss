@@ -2,6 +2,11 @@
   & .container {
     overflow: hidden;
   }
+  &__loading {
+    width: 1px;
+    margin: 0 auto;
+    padding: 10px 0;
+  }
   &__banner {
     position: relative;
     width: 100%;
@@ -45,7 +50,7 @@
       font-size: 16px;
       font-weight: bold;
       color: #525252;
-      margin: 0;
+      margin: 10px 0;
       padding: 15px 0 5px;
       border-bottom: 5px solid #D8D8D8;
     }
