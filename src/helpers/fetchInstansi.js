@@ -13,8 +13,8 @@ export const fetchInstansi = () => {
         let data = [];
         json.map((item) => {
           data.push({
-            label: item.organization,
-            value: item.organization,
+            label: item.name,
+            value: item.name,
             image: item.logo,
             url: '#'
           });

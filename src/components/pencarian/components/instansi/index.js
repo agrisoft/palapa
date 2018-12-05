@@ -23,7 +23,7 @@ export const Instansi = ({ data }) => {
           return (
             <li key={item.label}>
               <span className="pencarian__filter-item">{item.label}</span>
-              <span className="pencarian__filter-count">{0}</span>
+              <span className="pencarian__filter-count">{item.count}</span>
             </li>
           )
         })}

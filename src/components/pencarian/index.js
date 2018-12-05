@@ -12,6 +12,8 @@ import { fetchBanners } from '../../helpers/fetchBanners';
 import { fetchKategori } from '../../helpers/fetchKategori';
 import { fetchInstansi } from '../../helpers/fetchInstansi';
 import { fetchDataset } from '../../helpers/fetchDataset';
+import { addCountInstansi } from './helpers/add-count-instansi';
+import { addCountKategori } from './helpers/add-count-kategori';
 import './index.scss';
 
 const Pencarian = () => {
@@ -20,6 +22,10 @@ const Pencarian = () => {
   const dataInstansi = fetchInstansi();
   const dataKategori = fetchKategori();
   const dataDataset = fetchDataset();
+
+  const finalDataKategori = addCountKategori(dataKategori, dataDataset);
+  const finalDataInstansi = addCountInstansi(dataInstansi, dataDataset);
+
   const isSmall = useMedia("(max-width: 760px)");
   const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
   let className = '';
@@ -68,8 +74,8 @@ const Pencarian = () => {
                   <ZoomControl position="topleft" />
                 </Map>
               </div>
-              <Kategori data={dataKategori} />
-              <Instansi data={dataInstansi} />
+              <Kategori data={finalDataKategori} />
+              <Instansi data={finalDataInstansi} />
             </div>
           </div>
           <div className="pencarian__content">
