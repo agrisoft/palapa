@@ -32,7 +32,7 @@ export const ListDataset = ({ data, filter }) => {
             if (item.author !== filter.instansi) return null;
           }
         }
-        if (!item.title.toLowerCase().includes(filter.keyword.toLowerCase())) return null;
+        if (filter.keyword && !item.title.toLowerCase().includes(filter.keyword.toLowerCase())) return null;
         return (
           <div key={item.identifier} className="pencarian__dataset__list__item">
             <Dataset {...item} />

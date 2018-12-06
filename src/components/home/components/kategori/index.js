@@ -1,6 +1,5 @@
 import React from 'react';
 import PropagateLoader from 'react-spinners/PropagateLoader';
-import { Link } from "react-router-dom";
 import './index.scss';
 
 export const Kategori = ({ data, history }) => {
