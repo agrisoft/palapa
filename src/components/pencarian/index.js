@@ -17,17 +17,92 @@ import { addCountInstansi } from './helpers/add-count-instansi';
 import { addCountKategori } from './helpers/add-count-kategori';
 import './index.scss';
 
+const paginationPerPage = 12;
+
 const Pencarian = ({ location, history }) => {
   const filter = queryString.parse(location.search);
+  const currentPage = filter.page || 1;
+  delete filter.page;
   const [ keyword, setKeyword ] = useState(filter.keyword);
   const dataSettings = fetchSettings();
   const dataBanner = fetchBanners();
   const dataInstansi = fetchInstansi();
   const dataKategori = fetchKategori();
-  const dataDataset = fetchDataset();
+  const dataDataset = fetchDataset() || [];
 
   const finalDataKategori = addCountKategori(dataKategori, dataDataset);
   const finalDataInstansi = addCountInstansi(dataInstansi, dataDataset);
+
+  let filteredDataset = dataDataset.filter((item) => {
+    if (filter.kategori) {
+      if (Array.isArray(filter.kategori)) {
+        if (filter.kategori.indexOf(item.kategori) < 0) return false;
+      } else {
+        if (item.kategori !== filter.kategori) return false;
+      }
+    }
+    if (filter.instansi) {
+      if (Array.isArray(filter.instansi)) {
+        if (filter.instansi.indexOf(item.author) < 0) return false;
+      } else {
+        if (item.author !== filter.instansi) return false;
+      }
+    }
+    if (filter.keyword && !item.title.toLowerCase().includes(filter.keyword.toLowerCase())) return false;
+    return true;
+  });
+
+  let pagination = null;
+
+  if (filteredDataset.length > paginationPerPage) {
+    const startPage = (currentPage - 1) * paginationPerPage;
+    const endPage = startPage + paginationPerPage;
+
+    let paginateNext = null;
+    let paginatePrev = null;
+
+    if (endPage < filteredDataset.length) {
+      const filterNext = {
+        ...filter,
+        page: parseInt(currentPage) + 1
+      };
+      paginateNext = (
+        <span
+          className="pagination__next"
+          onClick={() => {
+            history.push('/pencarian?' + queryString.stringify(filterNext));
+          }}
+        >
+          Selanjutnya <span className="icon-arrow-right" />
+        </span>
+      );
+    }
+    if (currentPage > 1) {
+      const filterPrev = {
+        ...filter,
+        page: parseInt(currentPage) - 1
+      };
+      paginatePrev = (
+        <span
+          className="pagination__prev"
+          onClick={() => {
+            history.push('/pencarian?' + queryString.stringify(filterPrev));
+          }}
+        >
+          <span className="icon-arrow-left" /> Sebelumnya
+        </span>
+      );
+    }
+
+    filteredDataset = filteredDataset.splice(startPage, paginationPerPage);
+
+    pagination = (
+      <div className="pagination">
+        {paginateNext}
+        {paginatePrev}
+      </div>
+    )
+  }
 
   const isSmall = useMedia("(max-width: 760px)");
   const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
@@ -37,17 +112,6 @@ const Pencarian = ({ location, history }) => {
   } else if (isMedium) {
     className = 'layout-medium';
   }
-
-  let pagination = (
-    <div className="pagination">
-      <span className="pagination__item">1</span>
-      <span className="pagination__item-current">2</span>
-      <span className="pagination__item">2</span>
-      <span className="pagination__item">3</span>
-      <span className="pagination__item">4</span>
-    </div>
-  )
-  pagination = null;
 
   return (
     <div className={className}>
@@ -119,7 +183,7 @@ const Pencarian = ({ location, history }) => {
               />
             </div>
             <div className="pencarian__dataset__list">
-              <ListDataset data={dataDataset} filter={filter} />
+              <ListDataset data={filteredDataset} />
             </div>
            {pagination}
           </div>

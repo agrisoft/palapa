@@ -140,13 +140,22 @@
 }
 .pagination {
   padding: 20px 0 100px 40px;
-}
-.pagination__item,
-.pagination__item-current {
-  padding: 10px 17px;
-  border: 1px solid #979797;
-  background: #fff;
-  margin-right: 10px;
+  width: 100%;
+  overflow: hidden;
+  &__next,
+  &__prev{
+    cursor: pointer;
+    padding: 10px 17px;
+    border: 1px solid #979797;
+    background: #fff;
+    margin-right: 10px;
+  }
+  &__next {
+    float: right;
+  }
+  &__prev {
+    float: left;
+  }
 }
 
 .layout-small,
