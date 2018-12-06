@@ -56,8 +56,9 @@ export const Instansi = ({
             <div key={`carousel-${title}-${index}`} className="instansi__item-wrapper">
               <a
                 className="instansi__item"
-                href="#"
-                onClick={() => {
+                href="#instansi"
+                onClick={(e) => {
+                  e.preventDefault();
                   history.push(item.url);
                   window.scroll(0, 0);
                 }}

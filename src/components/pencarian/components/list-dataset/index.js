@@ -15,6 +15,7 @@ export const ListDataset = ({ data, filter }) => {
       </div>
     </div>
   );
+  console.log('DATA', data);
   return (
     <div>
       {data.map((item) => {

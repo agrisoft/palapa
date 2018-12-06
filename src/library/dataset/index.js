@@ -108,14 +108,20 @@ export const Dataset = ({
           <a
             href="#map"
             className="dataset__actions-map"
-            onClick={() => openMap()}
+            onClick={(e) => {
+              e.preventDefault();
+              openMap();
+            }}
           >
             <span className="icon-map" />
           </a>
           <a
             href="#info"
             className="dataset__actions-info"
-            onClick={() => getMetadata()}
+            onClick={(e) => {
+              e.preventDefault();
+              getMetadata();
+            }}
           >
             <span className="icon-info" />
           </a>
@@ -123,7 +129,10 @@ export const Dataset = ({
         </div>
         <div
           className="dataset__image-wrapper"
-          onClick={() => openMap()}
+          onClick={(e) => {
+            e.preventDefault();
+            openMap();
+          }}
         >
           <span className="dataset__image-aligner" />
           <img className="dataset__image" src={image} alt="" />
@@ -131,7 +140,16 @@ export const Dataset = ({
 
         <Link className="dataset__kategori" to={`/pencarian?kategori=${kategori}`}>{kategori}</Link>
         <div className="dataset__title-wrapper">
-          <a href="#info" className="dataset__title" onClick={() => getMetadata()}>{title}</a>
+          <a
+            href="#info"
+            className="dataset__title"
+            onClick={(e) => {
+              e.preventDefault();
+              getMetadata();
+            }}
+          >
+            {title}
+          </a>
         </div>
         <Link className="dataset__author" to={`/pencarian?instansi=${author}`}>{author}</Link>
       </div>

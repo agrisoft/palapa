@@ -32,10 +32,10 @@ export const Kategori = ({ data, history }) => {
               <a
                 className="kategori__item"
                 href="#kategori"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   history.push(item.link);
                   window.scrollTo(0, 0);
-                  return false;
                 }}
               >
                 <span className="kategori__item__logo">

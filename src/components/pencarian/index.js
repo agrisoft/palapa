@@ -83,10 +83,20 @@ const Pencarian = ({ location, history }) => {
           </div>
           <div className="pencarian__content">
             <div className="pencarian__input-wrapper">
-              <a href="#submit-search" className="pencarian__submit">
+              <a
+                href="#submit-search"
+                className="pencarian__submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 <span className="icon-magnifier" />
               </a>
-              <input type="text" placeholder="Kata Kunci" className="pencarian__input" />
+              <input
+                type="text"
+                placeholder="Kata Kunci"
+                className="pencarian__input"
+              />
             </div>
             <div className="pencarian__dataset__list">
               <ListDataset data={dataDataset} filter={filter} />
