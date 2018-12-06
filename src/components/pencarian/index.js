@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Map, TileLayer, ZoomControl } from 'react-leaflet';
 import queryString from 'query-string';
 import Header from '../../library/header';
@@ -19,7 +19,7 @@ import './index.scss';
 
 const Pencarian = ({ location, history }) => {
   const filter = queryString.parse(location.search);
-
+  const [ keyword, setKeyword ] = useState(filter.keyword);
   const dataSettings = fetchSettings();
   const dataBanner = fetchBanners();
   const dataInstansi = fetchInstansi();
@@ -88,6 +88,12 @@ const Pencarian = ({ location, history }) => {
                 className="pencarian__submit"
                 onClick={(e) => {
                   e.preventDefault();
+                  const nextFilter = {
+                    ...filter,
+                    keyword
+                  };
+                  const query = queryString.stringify(nextFilter);
+                  history.push(`/pencarian?${query}`);
                 }}
               >
                 <span className="icon-magnifier" />
@@ -96,6 +102,20 @@ const Pencarian = ({ location, history }) => {
                 type="text"
                 placeholder="Kata Kunci"
                 className="pencarian__input"
+                value={keyword}
+                onChange={(e) => {
+                  setKeyword(e.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    const nextFilter = {
+                      ...filter,
+                      keyword
+                    };
+                    const query = queryString.stringify(nextFilter);
+                    history.push(`/pencarian?${query}`);
+                  }
+                }}
               />
             </div>
             <div className="pencarian__dataset__list">
