@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import get from 'lodash/get';
 import { Map, TileLayer, WMSTileLayer, ZoomControl } from 'react-leaflet';
+import { Link } from "react-router-dom";
 import config from '../../config';
 import './index.scss';
 import { MetadataPanel } from './components/metadata-panel';
@@ -120,13 +121,19 @@ export const Dataset = ({
           </a>
           {downloadIcon}
         </div>
-        <div className="dataset__image-wrapper">
+        <div
+          className="dataset__image-wrapper"
+          onClick={() => openMap()}
+        >
           <span className="dataset__image-aligner" />
           <img className="dataset__image" src={image} alt="" />
         </div>
-        <div className="dataset__title">{title}</div>
-        <div className="dataset__kategori">{kategori}</div>
-        <div className="dataset__author">{author}</div>
+
+        <Link className="dataset__kategori" to={`/pencarian?kategori=${kategori}`}>{kategori}</Link>
+        <div className="dataset__title-wrapper">
+          <a href="#info" className="dataset__title" onClick={() => getMetadata()}>{title}</a>
+        </div>
+        <Link className="dataset__author" to={`/pencarian?instansi=${author}`}>{author}</Link>
       </div>
     </div>
   );

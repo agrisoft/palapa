@@ -18,6 +18,7 @@
     border: 1px solid #E3E3E3;
     border-width: 0 0 1px;
     border-radius: 5px 5px 20px 20px;
+    cursor: pointer;
   }
   &__image-aligner {
     display: inline-block;
@@ -30,26 +31,45 @@
     vertical-align: middle;
   }
   &__title {
-    padding: 5px 10px 0;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  &__kategori {
-    padding: 5px 10px 0;
+    display: inline-block;
+    padding: 0 10px 0;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
-  &__author {
-    padding: 5px 10px 0;
+  &__kategori {
+    margin-top: 7px;
+    display: inline-block;
+    padding: 0 10px 0;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: #333;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &__author {
+    display: inline-block;
+    padding: 0 10px 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   &__actions {
     position: absolute;
