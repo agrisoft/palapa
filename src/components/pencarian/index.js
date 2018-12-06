@@ -1,5 +1,6 @@
 import React from 'react';
 import { Map, TileLayer, ZoomControl } from 'react-leaflet';
+import queryString from 'query-string';
 import Header from '../../library/header';
 import { Carousel } from './components/carousel';
 import { Kategori } from './components/kategori';
@@ -16,7 +17,9 @@ import { addCountInstansi } from './helpers/add-count-instansi';
 import { addCountKategori } from './helpers/add-count-kategori';
 import './index.scss';
 
-const Pencarian = () => {
+const Pencarian = ({ location, history }) => {
+  const filter = queryString.parse(location.search);
+
   const dataSettings = fetchSettings();
   const dataBanner = fetchBanners();
   const dataInstansi = fetchInstansi();
@@ -74,8 +77,8 @@ const Pencarian = () => {
                   <ZoomControl position="topleft" />
                 </Map>
               </div>
-              <Kategori data={finalDataKategori} />
-              <Instansi data={finalDataInstansi} />
+              <Kategori data={finalDataKategori} filter={filter} history={history} />
+              <Instansi data={finalDataInstansi} filter={filter} />
             </div>
           </div>
           <div className="pencarian__content">
@@ -86,7 +89,7 @@ const Pencarian = () => {
               <input type="text" placeholder="Kata Kunci" className="pencarian__input" />
             </div>
             <div className="pencarian__dataset__list">
-              <ListDataset data={dataDataset} />
+              <ListDataset data={dataDataset} filter={filter} />
             </div>
            {pagination}
           </div>

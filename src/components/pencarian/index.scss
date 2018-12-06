@@ -43,6 +43,16 @@
       border-bottom: 1px solid #E3E3E3;
       background: #F5F5F5;
     }
+
+    &-inactive {
+      color: #999;
+      cursor: pointer;
+    }
+    &-active {
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+    }
   }
   &__panel {
     padding: 0 15px 10px;

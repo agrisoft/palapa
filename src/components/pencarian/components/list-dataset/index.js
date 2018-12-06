@@ -2,7 +2,7 @@ import React from 'react';
 import PropagateLoader from 'react-spinners/PropagateLoader';
 import { Dataset } from '../../../../library/dataset'
 
-export const ListDataset = ({ data }) => {
+export const ListDataset = ({ data, filter }) => {
   if (data === null) return (
     <div>
       <div className="pencarian__loading">
@@ -15,13 +15,24 @@ export const ListDataset = ({ data }) => {
       </div>
     </div>
   );
+  console.log(filter);
   return (
     <div>
-      {data.map((item) => (
-        <div key={item.identifier} className="pencarian__dataset__list__item">
-          <Dataset {...item} />
-        </div>
-      ))}
+      {data.map((item) => {
+        console.log(item);
+        if (filter.kategori) {
+          if (Array.isArray(filter.kategori)) {
+            if (filter.kategori.indexOf(item.kategori) < 0) return null;
+          } else {
+            if (item.kategori !== filter.kategori) return null;
+          }
+        }
+        return (
+          <div key={item.identifier} className="pencarian__dataset__list__item">
+            <Dataset {...item} />
+          </div>
+        )
+      })}
     </div>
   );
 };
