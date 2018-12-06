@@ -78,7 +78,7 @@ const Pencarian = ({ location, history }) => {
                 </Map>
               </div>
               <Kategori data={finalDataKategori} filter={filter} history={history} />
-              <Instansi data={finalDataInstansi} filter={filter} />
+              <Instansi data={finalDataInstansi} filter={filter} history={history} />
             </div>
           </div>
           <div className="pencarian__content">

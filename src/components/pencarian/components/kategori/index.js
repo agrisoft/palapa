@@ -28,12 +28,13 @@ export const Kategori = ({ data, filter, history }) => {
             className = 'pencarian__filter-inactive';
             if (Array.isArray(filter.kategori)) {
               const kategoriFilterForClick = [];
-              filter.kategori.map((kat, katIndex) => {
+              filter.kategori.map((kat) => {
                 if (kat === item.label) {
                   className = 'pencarian__filter-active';
                 } else {
                   kategoriFilterForClick.push(kat);
                 }
+                return kat;
               });
               if (className === 'pencarian__filter-active') {
                 clickFilter.kategori = kategoriFilterForClick;

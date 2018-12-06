@@ -15,16 +15,21 @@ export const ListDataset = ({ data, filter }) => {
       </div>
     </div>
   );
-  console.log(filter);
   return (
     <div>
       {data.map((item) => {
-        console.log(item);
         if (filter.kategori) {
           if (Array.isArray(filter.kategori)) {
             if (filter.kategori.indexOf(item.kategori) < 0) return null;
           } else {
             if (item.kategori !== filter.kategori) return null;
+          }
+        }
+        if (filter.instansi) {
+          if (Array.isArray(filter.instansi)) {
+            if (filter.instansi.indexOf(item.author) < 0) return null;
+          } else {
+            if (item.author !== filter.instansi) return null;
           }
         }
         return (

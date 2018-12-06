@@ -44,14 +44,16 @@
       background: #F5F5F5;
     }
 
+    li {
+      cursor: pointer;
+    }
+
     &-inactive {
       color: #999;
-      cursor: pointer;
     }
     &-active {
       color: #333;
       font-weight: bold;
-      cursor: pointer;
     }
   }
   &__panel {
