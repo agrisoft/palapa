@@ -16,7 +16,7 @@ export const fetchInstansi = () => {
             label: item.name,
             value: item.name,
             image: item.logo,
-            url: '#'
+            url: `/pencarian?instansi=${item.name}`
           });
           return true;
         });

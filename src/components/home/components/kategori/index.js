@@ -1,8 +1,9 @@
 import React from 'react';
 import PropagateLoader from 'react-spinners/PropagateLoader';
+import { Link } from "react-router-dom";
 import './index.scss';
 
-export const Kategori = ({ data }) => {
+export const Kategori = ({ data, history }) => {
   if (data === null) {
     return (
       <div className="kategori ">
@@ -30,7 +31,12 @@ export const Kategori = ({ data }) => {
             <div key={item.label} className="kategori__item-wrapper">
               <a
                 className="kategori__item"
-                href={item.link}
+                href="#kategori"
+                onClick={() => {
+                  history.push(item.link);
+                  window.scrollTo(0, 0);
+                  return false;
+                }}
               >
                 <span className="kategori__item__logo">
                   <img className="kategori__item__image" src={item.image} alt="" />

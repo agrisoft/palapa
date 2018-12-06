@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 
 const App = () => {
   return (
-    <Router onUpdate={() => window.scrollTo(0, 0)}>
+    <Router>
       <div>
         <Route path="/" exact component={Home} />
         <Route path="/jelajah/" component={Jelajah} />

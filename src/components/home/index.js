@@ -6,6 +6,7 @@ import Header from '../../library/header';
 import { Carousel } from './components/carousel';
 import { DatasetTerbaru } from './components/dataset-terbaru';
 import { Kategori } from './components/kategori';
+import { Instansi } from './components/instansi';
 import { LinkCarousel } from './components/link-carousel';
 import { Berita } from './components/berita';
 import { Footer } from '../../library/footer';
@@ -111,9 +112,9 @@ export const Home = ({ history }) => {
         </div>
       </div>
       <DatasetTerbaru data={datasetTerbaru} />
-      <Kategori data={dataKategori} />
-      <LinkCarousel
-        title="Instansi"
+      <Kategori data={dataKategori} history={history} />
+      <Instansi
+        history={history}
         data={dataInstansi}
         isSmall={isSmall}
         isMedium={isMedium}

@@ -13,7 +13,7 @@ export const fetchKategori = () => {
         let data = [];
         json.map((item) => {
           data.push({
-            link: '#',
+            link: `/pencarian?kategori=${item.keywords}`,
             label: item.keywords,
             value: item.keywords,
             image: item.logo
