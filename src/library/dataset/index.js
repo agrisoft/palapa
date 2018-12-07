@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import get from 'lodash/get';
 import { Map, TileLayer, WMSTileLayer, ZoomControl } from 'react-leaflet';
 import { Link } from "react-router-dom";
 import config from '../../config';
@@ -16,12 +15,13 @@ export const Dataset = ({
   author,
   image,
   identifier,
-  downloadable
+  downloadable,
+  bbox
 }) => {
+  const defaultMapCenter = [ -6.175985, 106.827313 ];
   const [isMetadataOpen, setIsMetadataOpen] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [metadata, setMetadata] = useState([]);
-  const [mapCenter, setMapCenter] = useState([ -6.175985, 106.827313 ]);
   const [mapBounds, setMapBounds] = useState(null);
 
   const getMetadata = () => {
@@ -35,23 +35,10 @@ export const Dataset = ({
   };
 
   const openMap = () => {
-    fetch(`${config.host}/csw?service=CSW&version=2.0.2&request=GetRecordById&ElementSetName=full&Id=${identifier}&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/json`)
-      .then(res => res.json())
-      .then(json => {
-        const base = 'csw:GetRecordByIdResponse.gmd:MD_Metadata.gmd:identificationInfo.gmd:MD_DataIdentification.';
-        const extent = [
-          parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:westBoundLongitude.gco:Decimal`)),
-          parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:eastBoundLongitude.gco:Decimal`)),
-          parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:southBoundLatitude.gco:Decimal`)),
-          parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:northBoundLatitude.gco:Decimal`))
-        ];
-        setMapBounds([
-          [extent[2], extent[0]],
-          [extent[3], extent[1]]
-        ]);
-        setIsMapOpen(true);
-      });
+    setMapBounds(bbox);
+    setIsMapOpen(true);
   };
+
   let downloadIcon = null;
   if (downloadable === 'Y') {
     downloadIcon = (
@@ -67,7 +54,7 @@ export const Dataset = ({
   let mapProps = {};
   if (!mapBounds) {
     mapProps = {
-      center: mapCenter,
+      center: defaultMapCenter,
       zoom: 12,
       zoomControl: false,
     };
