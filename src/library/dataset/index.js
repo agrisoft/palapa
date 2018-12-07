@@ -22,6 +22,7 @@ export const Dataset = ({
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [metadata, setMetadata] = useState([]);
   const [mapCenter, setMapCenter] = useState([ -6.175985, 106.827313 ]);
+  const [mapBounds, setMapBounds] = useState(null);
 
   const getMetadata = () => {
     fetch(`${config.host}/csw?service=CSW&version=2.0.2&request=GetRecordById&ElementSetName=full&Id=${identifier}&outputSchema=http://www.isotc211.org/2005/gmd&outputFormat=application/json`)
@@ -44,9 +45,9 @@ export const Dataset = ({
           parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:southBoundLatitude.gco:Decimal`)),
           parseFloat(get(json, `${base}gmd:extent.gmd:EX_Extent.gmd:geographicElement.gmd:EX_GeographicBoundingBox.gmd:northBoundLatitude.gco:Decimal`))
         ];
-        setMapCenter([
-          (extent[2] + extent[3]) / 2,
-          (extent[0] + extent[1]) / 2,
+        setMapBounds([
+          [extent[2], extent[0]],
+          [extent[3], extent[1]]
         ]);
         setIsMapOpen(true);
       });
@@ -62,6 +63,20 @@ export const Dataset = ({
       </a>
     );
   }
+
+  let mapProps = {};
+  if (!mapBounds) {
+    mapProps = {
+      center: mapCenter,
+      zoom: 12,
+      zoomControl: false,
+    };
+  } else {
+    mapProps = {
+      bounds: mapBounds,
+      zoomControl: false,
+    };
+  }
   return (
     <div>
       <Modal
@@ -75,7 +90,7 @@ export const Dataset = ({
               <span className="icon-close" />
             </span>
           </div>
-          <Map center={mapCenter} zoom={12} zoomControl={false}>
+          <Map {...mapProps}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
