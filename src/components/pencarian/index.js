@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Map, TileLayer, ZoomControl } from 'react-leaflet';
+import { latLngBounds } from 'leaflet';
 import queryString from 'query-string';
 import Header from '../../library/header';
 import { Carousel } from './components/carousel';
@@ -18,6 +19,33 @@ import { addCountKategori } from './helpers/add-count-kategori';
 import './index.scss';
 
 const paginationPerPage = 12;
+let filterMaxExtent;
+
+const findMaxExtent = (dataDataset) => {
+  if (filterMaxExtent) return filterMaxExtent;
+  let extent;
+  dataDataset.map((item) => {
+    if (!extent) {
+      extent = item.bbox;
+    } else {
+      if (item.bbox[0][0] < extent[0][0]) {
+        extent[0][0] = item.bbox[0][0];
+      }
+      if (item.bbox[0][1] < extent[0][1]) {
+        extent[0][1] = item.bbox[0][1];
+      }
+      if (item.bbox[1][0] > extent[1][0]) {
+        extent[1][0] = item.bbox[1][0];
+      }
+      if (item.bbox[1][1] > extent[1][1]) {
+        extent[1][1] = item.bbox[1][1];
+      }
+    }
+    return item;
+  });
+  filterMaxExtent = extent;
+  return extent;
+}
 
 const Pencarian = ({ location, history }) => {
   const filter = queryString.parse(location.search);
@@ -32,6 +60,41 @@ const Pencarian = ({ location, history }) => {
 
   const finalDataKategori = addCountKategori(dataKategori, dataDataset);
   const finalDataInstansi = addCountInstansi(dataInstansi, dataDataset);
+
+  const maxExtent = findMaxExtent(dataDataset);
+  let filterMapProps;
+  let map = null;
+  if (maxExtent) {
+    filterMapProps = {
+      bounds: maxExtent,
+      zoomControl: false
+    };
+
+    map = (
+      <Map
+        {...filterMapProps}
+        onMoveend={(e) => {
+          const map = e.target;
+          const curBounds =  map.getBounds();
+          const south = curBounds.getSouth();
+          const west = curBounds.getWest();
+          const east = curBounds.getEast();
+          const north = curBounds.getNorth();
+          filter.bounds = [[south, west], [north, east]];
+          history.push(`/pencarian?${queryString.stringify(filter)}`);
+        }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <ZoomControl position="topleft" />
+      </Map>
+    );
+  }
+
+  if (!filter.bounds) {
+    filter.bounds = queryString.stringify(maxExtent);
+  }
 
   let filteredDataset = dataDataset.filter((item) => {
     if (filter.kategori) {
@@ -49,6 +112,18 @@ const Pencarian = ({ location, history }) => {
       }
     }
     if (filter.keyword && !item.title.toLowerCase().includes(filter.keyword.toLowerCase())) return false;
+
+    if (filter.bounds) {
+      const swString = filter.bounds[0].split(',');
+      const nwString = filter.bounds[1].split(',');
+      const sw = [parseFloat(swString[0]), parseFloat(swString[1])];
+      const nw = [parseFloat(nwString[0]), parseFloat(nwString[1])];
+      const bbox = [sw, nw];
+      const curMapBounds = latLngBounds(bbox);
+      const itemBounds = latLngBounds(item.bbox);
+      return curMapBounds.intersects(itemBounds);
+    }
+
     return true;
   });
 
@@ -134,12 +209,7 @@ const Pencarian = ({ location, history }) => {
             <div className="pencarian__panel">
               <h4>Batas Pencarian</h4>
               <div className="pencarian__peta">
-                <Map center={[ -6.175985, 106.827313 ]} zoom={12} zoomControl={false}>
-                  <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <ZoomControl position="topleft" />
-                </Map>
+                {map}
               </div>
               <Kategori data={finalDataKategori} filter={filter} history={history} />
               <Instansi data={finalDataInstansi} filter={filter} history={history} />

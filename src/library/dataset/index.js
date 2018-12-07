@@ -65,7 +65,7 @@ export const Dataset = ({
     };
   }
   return (
-    <div>
+    <div id={`dataset-${identifier}`}>
       <Modal
         isOpen={isMapOpen}
         onRequestClose={() => setIsMapOpen(false)}

@@ -18,6 +18,14 @@ export const fetchDataset = () => {
           const attemp2 = attemp1[1].split(',');
           const x1 = attemp2[0].split(' ');
           const x2 = attemp2[1].split(' ');
+
+          const ignoredDataset = [
+            'BLH:semak_000020181207110813',
+            'BLH:rbi35k_ntb_tambak_ar_25k_000020181207104524',
+            'BLH:rbi25k_ntb_tambak_ar_25k_000020181207104524'
+          ];
+          if (ignoredDataset.indexOf(item.identifier) > -1) return true;
+
           data.push({
             identifier: item.identifier,
             title: item.title,
