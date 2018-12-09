@@ -16,6 +16,7 @@ import { fetchInstansi } from '../../helpers/fetchInstansi';
 import { fetchDataset } from '../../helpers/fetchDataset';
 import { addCountInstansi } from './helpers/add-count-instansi';
 import { addCountKategori } from './helpers/add-count-kategori';
+import { Pagination, paginateDataset } from './components/pagination';
 import './index.scss';
 
 const paginationPerPage = 12;
@@ -128,56 +129,9 @@ const Pencarian = ({ location, history }) => {
   });
 
   let pagination = null;
+  let datasetLength = filteredDataset.length;
 
-  if (filteredDataset.length > paginationPerPage) {
-    const startPage = (currentPage - 1) * paginationPerPage;
-    const endPage = startPage + paginationPerPage;
-
-    let paginateNext = null;
-    let paginatePrev = null;
-
-    if (endPage < filteredDataset.length) {
-      const filterNext = {
-        ...filter,
-        page: parseInt(currentPage) + 1
-      };
-      paginateNext = (
-        <span
-          className="pagination__next"
-          onClick={() => {
-            history.push('/pencarian?' + queryString.stringify(filterNext));
-          }}
-        >
-          Selanjutnya <span className="icon-arrow-right" />
-        </span>
-      );
-    }
-    if (currentPage > 1) {
-      const filterPrev = {
-        ...filter,
-        page: parseInt(currentPage) - 1
-      };
-      paginatePrev = (
-        <span
-          className="pagination__prev"
-          onClick={() => {
-            history.push('/pencarian?' + queryString.stringify(filterPrev));
-          }}
-        >
-          <span className="icon-arrow-left" /> Sebelumnya
-        </span>
-      );
-    }
-
-    filteredDataset = filteredDataset.splice(startPage, paginationPerPage);
-
-    pagination = (
-      <div className="pagination">
-        {paginateNext}
-        {paginatePrev}
-      </div>
-    )
-  }
+  const paginatedDataset = paginateDataset({ dataset: filteredDataset, page: currentPage});
 
   const isSmall = useMedia("(max-width: 760px)");
   const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
@@ -253,9 +207,14 @@ const Pencarian = ({ location, history }) => {
               />
             </div>
             <div className="pencarian__dataset__list">
-              <ListDataset data={filteredDataset} />
+              <ListDataset data={paginatedDataset} />
             </div>
-           {pagination}
+            <Pagination
+              datasetLength={datasetLength}
+              currentPage={currentPage}
+              filter={filter}
+              history={history}
+            />
           </div>
         </div>
         <Footer dataSettings={dataSettings} />
