@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Map, TileLayer, ZoomControl } from 'react-leaflet';
+import queryString from 'query-string';
 import Select from 'react-select';
+
 import Header from '../../library/header';
 
 import { Carousel } from './components/carousel';
@@ -21,7 +23,9 @@ import { fetchInstansi } from '../../helpers/fetchInstansi';
 import { fetchBanners } from '../../helpers/fetchBanners';
 import { fetchWeb } from './helpers/fetchWeb';
 
+let advancedFilter = {};
 export const Home = ({ history }) => {
+  const [ keyword, setKeyword ] = useState('');
   const dataSettings = fetchSettings();
   const dataBanner = fetchBanners();
   const dataset = fetchDataset();
@@ -56,6 +60,19 @@ export const Home = ({ history }) => {
     className = 'layout-medium';
     mapHeight = 400;
   }
+  const handleSearchSubmit = (e) => {
+    if (!isAdvanceActive) {
+      if (keyword) {
+        history.push(`/pencarian?keyword=${keyword}`);
+        window.scroll(0,0);
+      }
+    } else {
+      e.preventDefault();
+      const params = queryString.stringify(advancedFilter);
+      history.push(`/pencarian?${params}`);
+      window.scroll(0,0);
+    }
+  }
 
   return (
     <div className={className}>
@@ -82,20 +99,52 @@ export const Home = ({ history }) => {
                 <span className="icon-settings" />
               </span>
               <span className="search__submit-wrapper">
-                <a href="#submit-search" className="search__submit">
+                <a
+                  href="#submit-search"
+                  className="search__submit"
+                  onClick={(e) => handleSearchSubmit(e)}
+                >
                   <span className="icon-magnifier" />
                 </a>
               </span>
               <div className="search__select-wrapper">
                 <div className="search__select-kategori">
-                  <Select placeholder="Semua Kategori" options={dataKategori || []} styles={selectColorStyles} />
+                  <Select
+                    placeholder="Semua Kategori"
+                    options={dataKategori || []}
+                    styles={selectColorStyles}
+                    onChange={(e) => {
+                      advancedFilter.kategori = e.value;
+                    }}
+                  />
                 </div>
                 <div className="search__select-walidata">
-                  <Select placeholder="Semua Instansi" options={dataInstansi || []} styles={selectColorStyles} />
+                  <Select
+                    placeholder="Semua Instansi"
+                    options={dataInstansi || []}
+                    styles={selectColorStyles}
+                    onChange={(e) => {
+                      advancedFilter.instansi = e.value;
+                    }}
+                  />
                 </div>
               </div>
               <span className="search__input-wrapper">
-                <input type="text" placeholder="Kata Kunci" className="search__input" />
+                <input
+                  type="text"
+                  placeholder="Kata Kunci"
+                  className="search__input"
+                  value={keyword}
+                  onChange={e => {
+                    advancedFilter.keyword = e.target.value;
+                    setKeyword(e.target.value);
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearchSubmit();
+                    }
+                  }}
+                />
               </span>
               <div className="search__map-wrapper" style={{ height: isAdvanceActive ? mapHeight : 0}}>
                 <div className="search__map">
