@@ -17,39 +17,27 @@ import { fetchDataset } from '../../helpers/fetchDataset';
 import { addCountInstansi } from './helpers/add-count-instansi';
 import { addCountKategori } from './helpers/add-count-kategori';
 import { Pagination, paginateDataset } from './components/pagination';
+import { findMaxExtent } from './helpers/find-dataset-maxextent';
 import './index.scss';
 
-const paginationPerPage = 12;
-let filterMaxExtent;
+let filter;
 
-const findMaxExtent = (dataDataset) => {
-  if (filterMaxExtent) return filterMaxExtent;
-  let extent;
-  dataDataset.map((item) => {
-    if (!extent) {
-      extent = item.bbox;
-    } else {
-      if (item.bbox[0][0] < extent[0][0]) {
-        extent[0][0] = item.bbox[0][0];
-      }
-      if (item.bbox[0][1] < extent[0][1]) {
-        extent[0][1] = item.bbox[0][1];
-      }
-      if (item.bbox[1][0] > extent[1][0]) {
-        extent[1][0] = item.bbox[1][0];
-      }
-      if (item.bbox[1][1] > extent[1][1]) {
-        extent[1][1] = item.bbox[1][1];
-      }
-    }
-    return item;
-  });
-  filterMaxExtent = extent;
-  return extent;
-}
+const onChangeMap = ({e,  history}) => {
+  const map = e.target;
+  const curBounds =  map.getBounds();
+  const south = curBounds.getSouth();
+  const west = curBounds.getWest();
+  const east = curBounds.getEast();
+  const north = curBounds.getNorth();
+  const nextFilter = {
+    ...filter,
+    bounds: [[south, west], [north, east]]
+  };
+  history.push(`/pencarian?${queryString.stringify(nextFilter)}`);
+};
 
 const Pencarian = ({ location, history }) => {
-  const filter = queryString.parse(location.search);
+  filter = queryString.parse(location.search);
   const currentPage = filter.page || 1;
   delete filter.page;
   const [ keyword, setKeyword ] = useState(filter.keyword);
@@ -62,39 +50,32 @@ const Pencarian = ({ location, history }) => {
   const finalDataKategori = addCountKategori(dataKategori, dataDataset);
   const finalDataInstansi = addCountInstansi(dataInstansi, dataDataset);
 
-  const maxExtent = findMaxExtent(dataDataset);
+  let mapBounds = findMaxExtent(dataDataset);
   let filterMapProps;
   let map = null;
-  if (maxExtent) {
+  if (mapBounds) {
+    if (filter.bounds) {
+      const filterBoundsX1 = filter.bounds[0].split(',');
+      const filterBoundsX2 = filter.bounds[1].split(',');
+      mapBounds = [
+        [parseFloat(filterBoundsX1[0]), parseFloat(filterBoundsX1[1])],
+        [parseFloat(filterBoundsX2[0]), parseFloat(filterBoundsX2[1])]
+      ];
+    }
     filterMapProps = {
-      bounds: maxExtent,
+      bounds: mapBounds,
       zoomControl: false
     };
 
     map = (
       <Map
         {...filterMapProps}
-        onMoveend={(e) => {
-          const map = e.target;
-          const curBounds =  map.getBounds();
-          const south = curBounds.getSouth();
-          const west = curBounds.getWest();
-          const east = curBounds.getEast();
-          const north = curBounds.getNorth();
-          filter.bounds = [[south, west], [north, east]];
-          history.push(`/pencarian?${queryString.stringify(filter)}`);
-        }}
+        onMoveend={(e) => onChangeMap({e, history})}
       >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <ZoomControl position="topleft" />
       </Map>
     );
-  }
-
-  if (!filter.bounds) {
-    filter.bounds = queryString.stringify(maxExtent);
   }
 
   let filteredDataset = dataDataset.filter((item) => {
@@ -115,12 +96,7 @@ const Pencarian = ({ location, history }) => {
     if (filter.keyword && !item.title.toLowerCase().includes(filter.keyword.toLowerCase())) return false;
 
     if (filter.bounds) {
-      const swString = filter.bounds[0].split(',');
-      const nwString = filter.bounds[1].split(',');
-      const sw = [parseFloat(swString[0]), parseFloat(swString[1])];
-      const nw = [parseFloat(nwString[0]), parseFloat(nwString[1])];
-      const bbox = [sw, nw];
-      const curMapBounds = latLngBounds(bbox);
+      const curMapBounds = latLngBounds(mapBounds);
       const itemBounds = latLngBounds(item.bbox);
       return curMapBounds.intersects(itemBounds);
     }
@@ -128,7 +104,6 @@ const Pencarian = ({ location, history }) => {
     return true;
   });
 
-  let pagination = null;
   let datasetLength = filteredDataset.length;
 
   const paginatedDataset = paginateDataset({ dataset: filteredDataset, page: currentPage});
@@ -176,10 +151,7 @@ const Pencarian = ({ location, history }) => {
                 className="pencarian__submit"
                 onClick={(e) => {
                   e.preventDefault();
-                  const nextFilter = {
-                    ...filter,
-                    keyword
-                  };
+                  const nextFilter = { ...filter, keyword };
                   const query = queryString.stringify(nextFilter);
                   history.push(`/pencarian?${query}`);
                 }}
@@ -191,15 +163,10 @@ const Pencarian = ({ location, history }) => {
                 placeholder="Kata Kunci"
                 className="pencarian__input"
                 value={keyword}
-                onChange={(e) => {
-                  setKeyword(e.target.value);
-                }}
+                onChange={e => setKeyword(e.target.value)}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
-                    const nextFilter = {
-                      ...filter,
-                      keyword
-                    };
+                    const nextFilter = { ...filter, keyword };
                     const query = queryString.stringify(nextFilter);
                     history.push(`/pencarian?${query}`);
                   }
