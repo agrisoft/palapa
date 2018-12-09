@@ -30,7 +30,7 @@ export const Instansi = ({
   if (data.length < 1) return null;
 
   let numItems = 6;
-  if (isSmall) numItems = 4;
+  if (isSmall) numItems = 3;
   if (isMedium) numItems = 5;
 
   const settings = {

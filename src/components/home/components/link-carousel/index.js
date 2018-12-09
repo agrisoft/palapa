@@ -28,8 +28,8 @@ export const LinkCarousel = ({
   }
   if (data.length < 1) return null;
 
-  let numItems = 6;
-  if (isSmall) numItems = 4;
+  let numItems = 5;
+  if (isSmall) numItems = 2;
   if (isMedium) numItems = 5;
 
   const settings = {
@@ -56,12 +56,12 @@ export const LinkCarousel = ({
               <a
                 className="link-carousel__item"
                 href={item.url}
+                title={item.label}
               >
                 <span className="link-carousel__item__logo">
                   <span className="link-carousel__item__image-aligner" />
                   <img className="link-carousel__item__image" src={item.image} alt="" />
                 </span>
-                <span className="link-carousel__item__label">{item.label}</span>
               </a>
             </div>
           ))}

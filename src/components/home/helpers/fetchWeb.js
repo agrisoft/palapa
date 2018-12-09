@@ -13,7 +13,7 @@ export const fetchWeb = () => {
         let data = [];
         json.map((item) => {
           data.push({
-            label: item.name,
+            label: item.nama,
             image: item.image,
             url: item.url
           });
