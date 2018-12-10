@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Map, TileLayer, ZoomControl } from 'react-leaflet';
-import { latLngBounds } from 'leaflet';
 import queryString from 'query-string';
 import Header from '../../library/header';
 import { Carousel } from './components/carousel';
@@ -18,6 +17,7 @@ import { addCountInstansi } from './helpers/add-count-instansi';
 import { addCountKategori } from './helpers/add-count-kategori';
 import { Pagination, paginateDataset } from './components/pagination';
 import { findMaxExtent } from './helpers/find-dataset-maxextent';
+import { filterDataset } from './helpers/filter-dataset';
 import './index.scss';
 
 let filter;
@@ -78,30 +78,10 @@ const Pencarian = ({ location, history }) => {
     );
   }
 
-  let filteredDataset = dataDataset.filter((item) => {
-    if (filter.kategori) {
-      if (Array.isArray(filter.kategori)) {
-        if (filter.kategori.indexOf(item.kategori) < 0) return false;
-      } else {
-        if (item.kategori !== filter.kategori) return false;
-      }
-    }
-    if (filter.instansi) {
-      if (Array.isArray(filter.instansi)) {
-        if (filter.instansi.indexOf(item.author) < 0) return false;
-      } else {
-        if (item.author !== filter.instansi) return false;
-      }
-    }
-    if (filter.keyword && !item.title.toLowerCase().includes(filter.keyword.toLowerCase())) return false;
-
-    if (filter.bounds) {
-      const curMapBounds = latLngBounds(mapBounds);
-      const itemBounds = latLngBounds(item.bbox);
-      return curMapBounds.intersects(itemBounds);
-    }
-
-    return true;
+  let filteredDataset = filterDataset({
+    dataset: dataDataset,
+    filter,
+    mapBounds
   });
 
   let datasetLength = filteredDataset.length;
