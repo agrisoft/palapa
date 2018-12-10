@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/material-icons.css">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <script src="js/pace.min.js">
+        pace.start()
+    </script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .header {
+        height: 80px;
+        background: #fff;
+        font-family: 'Open Sans', sans-serif;
+        color: #4A4A4A;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .header .container {
+        overflow: hidden;
+        width: 1160px;
+        margin: 0 auto;
+      }
+      .header__logo {
+        float: left;
+      }
+      .header__logo img {
+        float: left;
+        margin-top: 12px;
+        max-height: 57px;
+      }
+      .header__logo h1 {
+        float: left;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 23px 0 0 13px;
+        padding: 0;
+        text-transform: uppercase;
+      }
+      .header__logo h1 a {
+        color: #333;
+        text-decoration: none;
+      }
+      .header__logo h1 a:hover {
+        text-decoration: underline;
+      }
+
+      .header__nav {
+        float: right;
+        margin-right: -15px;
+      }
+      .header__nav a {
+        float: left;
+        height: 80px;
+        padding-top: 28px;
+        color: #000;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 15px;
+      }
+      .header__nav a.active {
+        color: #7F1818;
+      }
+      .header__nav-handle {
+        display: none;
+      }
+      @media (min-width: 760px) and (max-width : 1160px) {
+        .header {
+          padding: 0 20px;
+        }
+        .header .container {
+          width: 100%;
+          margin: 0;
+        }
+      }
+      @media (max-width: 760px) {
+        .header {
+          height: auto;
+        }
+        .header .container {
+          width: 100%;
+          margin: 0;
+        }
+        .header__logo {
+          padding: 0 0 13px 20px;
+          width: 100%;
+          overflow: hidden;
+          float: none;
+        }
+        .header__logo h1 {
+          font-size: 14px;
+        }
+        .header__logo img {
+          max-height: 45px;
+        }
+        .header__nav {
+          height: 0;
+          overflow: hidden;
+          float: none;
+        }
+        .header__nav a {
+          float: none;
+          display: block;
+          margin: 0;
+          height: auto;
+          padding: 10px 20px;
+          border-bottom: 1px solid #fff;
+          background: #eee;
+        }
+        .header__nav-handle {
+          display: block;
+          float: right;
+          margin: 15px 20px 0;
+          background: #eee;
+          padding: 5px 10px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+      }
+    </style>
+</head>
+
+<body>
+    <!-- Content -->
+    <div class="header">
+      <div class="container">
+        <div class="header__logo">
+          <a href="/">
+            <img src="" alt="">
+          </a>
+          <h1><a href="/"></a></h1>
+          <div class="header__nav-handle">
+            <span class="icon-list"></span>
+          </div>
+        </div>
+        <div class="header__nav">
+          <a href="/">Home</a>
+          <a class="active" href="/jelajah/">Jelajah</a>
+          <a href="/pencarian/">Pencarian</a>
+        </div>
+      </div>
+    </div>
+    <div id="jelajah">
+        <div id="jelajah_map"></div>
+        <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+        </div>
+    </div>
+
+    <!--Import jQuery before materialize.js-->
+    <link type="text/css" rel="stylesheet" href="vendors/uploadfile/uploadfile.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="vendors/uploadfile/jquery.uploadfile.js"></script>
+    <!-- <script type="text/javascript" src="js/jquery-sortable.js"></script> -->
+    <script type="text/javascript" src="js/Sortable.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Openlayers -->
+    <link type="text/css" rel="stylesheet" href="css/ol.css">
+    <script type="text/javascript" src="vendors/ol/ol.js"></script>
+    <script type="text/javascript" src="vendors/ol/ol3-popup.js"></script>
+    <!-- Others -->
+    <script type="text/javascript" src="vendors/proj4js/proj4.js"></script>
+    <script type="text/javascript" src="vendors/shp2geojson/jszip.js"></script>
+    <script type="text/javascript" src="vendors/shp2geojson/jszip-utils.js"></script>
+    <script type="text/javascript" src="vendors/shp2geojson/preprocess.js"></script>
+    <script type="text/javascript" src="vendors/shp2geojson/preview.js"></script>
+    <script type="text/javascript" src="vendors/csv2geojson/csv2geojson.js"></script>
+    <script type="text/javascript" src="js/wms-capabilities.js"></script>
+    <script type="text/javascript" src="js/dropzone.js"></script>
+    <script type="text/javascript" src="js/vecloader.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/jelajah3.css">
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="js/jelajah3.js"></script>
+</body>
+
+</html>

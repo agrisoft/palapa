@@ -27,7 +27,7 @@ const Header = ({
         </div>
         <div className="header__nav">
           <NavLink exact activeClassName="active" to="/">Home</NavLink>
-          <NavLink activeClassName="active" to="/jelajah/">Jelajah</NavLink>
+          <a href="/jelajah/">Jelajah</a>
           <NavLink activeClassName="active" to="/pencarian/">Pencarian</NavLink>
         </div>
       </div>
