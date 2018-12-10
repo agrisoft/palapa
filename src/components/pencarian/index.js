@@ -16,7 +16,7 @@ import { fetchDataset } from '../../helpers/fetchDataset';
 import { addCountInstansi } from './helpers/add-count-instansi';
 import { addCountKategori } from './helpers/add-count-kategori';
 import { Pagination, paginateDataset } from './components/pagination';
-import { findMaxExtent } from './helpers/find-dataset-maxextent';
+import { findMaxExtent } from '../../helpers/find-dataset-maxextent';
 import { filterDataset } from './helpers/filter-dataset';
 import './index.scss';
 
@@ -86,7 +86,10 @@ const Pencarian = ({ location, history }) => {
 
   let datasetLength = (filteredDataset) ? filteredDataset.length : 0;
 
-  const paginatedDataset = paginateDataset({ dataset: filteredDataset, page: currentPage});
+  const paginatedDataset = paginateDataset({
+    dataset: filteredDataset,
+    page: currentPage
+  });
 
   const isSmall = useMedia("(max-width: 760px)");
   const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");

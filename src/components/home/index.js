@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Map, TileLayer, ZoomControl } from 'react-leaflet';
+import {
+  Map,
+  TileLayer,
+  ZoomControl,
+  // Rectangle,
+} from 'react-leaflet';
 import queryString from 'query-string';
 import Select from 'react-select';
 
@@ -22,8 +27,19 @@ import { fetchKategori } from '../../helpers/fetchKategori';
 import { fetchInstansi } from '../../helpers/fetchInstansi';
 import { fetchBanners } from '../../helpers/fetchBanners';
 import { fetchWeb } from './helpers/fetchWeb';
+import { findMaxExtent } from '../../helpers/find-dataset-maxextent';
 
 let advancedFilter = {};
+
+const onChangeMap = ({e,  history}) => {
+  const map = e.target;
+  const curBounds =  map.getBounds();
+  const south = curBounds.getSouth();
+  const west = curBounds.getWest();
+  const east = curBounds.getEast();
+  const north = curBounds.getNorth();
+  advancedFilter.bounds = [[south, west], [north, east]]
+};
 export const Home = ({ history }) => {
   const [ keyword, setKeyword ] = useState('');
   const dataSettings = fetchSettings();
@@ -36,6 +52,25 @@ export const Home = ({ history }) => {
   const dataBerita = fetchBerita();
 
   const [isAdvanceActive, setAdvanceActive] = useState(false);
+
+  let mapBounds = findMaxExtent(dataset);
+  let map = null;
+  if (mapBounds && isAdvanceActive && map == null) {
+        // <Rectangle bounds={mapBounds} color="red" />
+    map = (
+      <Map
+        bounds={mapBounds}
+        zoomControl={false}
+        onMoveend={(e) => onChangeMap({e, history})}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <ZoomControl position="topleft" />
+      </Map>
+    );
+  }
+
   const isSmall = useMedia("(max-width: 760px)");
   const isMedium = useMedia("(min-width: 760px) and (max-width : 1160px)");
   let searchClassName = 'search';
@@ -61,13 +96,13 @@ export const Home = ({ history }) => {
     mapHeight = 400;
   }
   const handleSearchSubmit = (e) => {
+    e.preventDefault();
     if (!isAdvanceActive) {
       if (keyword) {
         history.push(`/pencarian?keyword=${keyword}`);
         window.scroll(0,0);
       }
     } else {
-      e.preventDefault();
       const params = queryString.stringify(advancedFilter);
       history.push(`/pencarian?${params}`);
       window.scroll(0,0);
@@ -148,12 +183,7 @@ export const Home = ({ history }) => {
               </span>
               <div className="search__map-wrapper" style={{ height: isAdvanceActive ? mapHeight : 0}}>
                 <div className="search__map">
-                  <Map center={[ -6.175985, 106.827313 ]} zoom={12} zoomControl={false}>
-                    <TileLayer
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <ZoomControl position="topleft" />
-                  </Map>
+                  {map}
                 </div>
               </div>
             </div>
