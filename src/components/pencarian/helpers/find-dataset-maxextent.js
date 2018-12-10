@@ -1,6 +1,7 @@
 let filterMaxExtent;
 
 export const findMaxExtent = (dataset) => {
+  if (dataset === null) return null;
   if (filterMaxExtent) return filterMaxExtent;
   let extent;
   dataset.map((item) => {

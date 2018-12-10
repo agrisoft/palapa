@@ -15,6 +15,11 @@ export const ListDataset = ({ data }) => {
       </div>
     </div>
   );
+  if (data.length < 1) {
+    return (
+      <div className="pencarian__nodata">Data tidak ditemukan.</div>
+    )
+  }
   return (
     <div>
       {data.map((item) => {

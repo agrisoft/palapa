@@ -7,6 +7,7 @@ export const paginateDataset = ({
   dataset,
   page,
 }) => {
+  if (dataset === null) return null;
   if (dataset.length < paginationPerPage) return dataset;
 
   const startPage = (page - 1) * paginationPerPage;

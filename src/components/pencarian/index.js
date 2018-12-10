@@ -45,7 +45,7 @@ const Pencarian = ({ location, history }) => {
   const dataBanner = fetchBanners();
   const dataInstansi = fetchInstansi();
   const dataKategori = fetchKategori();
-  const dataDataset = fetchDataset() || [];
+  const dataDataset = fetchDataset();
 
   const finalDataKategori = addCountKategori(dataKategori, dataDataset);
   const finalDataInstansi = addCountInstansi(dataInstansi, dataDataset);
@@ -84,7 +84,7 @@ const Pencarian = ({ location, history }) => {
     mapBounds
   });
 
-  let datasetLength = filteredDataset.length;
+  let datasetLength = (filteredDataset) ? filteredDataset.length : 0;
 
   const paginatedDataset = paginateDataset({ dataset: filteredDataset, page: currentPage});
 
