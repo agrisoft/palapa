@@ -12,4 +12,3 @@ try {
     var map_extent = [94.9723, -11.0097, 141.012, 6.07724]
 }
 var embedded = true;
-

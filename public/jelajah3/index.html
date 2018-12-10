@@ -1,20 +1,126 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <!--Import Google Icon Font-->
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/header.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/material-icons.css">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-
     <script src="js/pace.min.js">
         pace.start()
     </script>
-
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .header {
+        height: 80px;
+        background: #fff;
+        font-family: 'Open Sans', sans-serif;
+        color: #4A4A4A;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .header .container {
+        overflow: hidden;
+        width: 1160px;
+        margin: 0 auto;
+      }
+      .header__logo {
+        float: left;
+      }
+      .header__logo img {
+        float: left;
+        margin-top: 12px;
+        max-height: 57px;
+      }
+      .header__logo h1 {
+        float: left;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 23px 0 0 13px;
+        padding: 0;
+        text-transform: uppercase;
+      }
+      .header__logo h1 a {
+        color: #333;
+        text-decoration: none;
+      }
+      .header__logo h1 a:hover {
+        text-decoration: underline;
+      }
+
+      .header__nav {
+        float: right;
+        margin-right: -15px;
+      }
+      .header__nav a {
+        float: left;
+        height: 80px;
+        padding-top: 28px;
+        color: #000;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 15px;
+      }
+      .header__nav a.active {
+        color: #7F1818;
+      }
+      .header__nav-handle {
+        display: none;
+      }
+      @media (min-width: 760px) and (max-width : 1160px) {
+        .header {
+          padding: 0 20px;
+        }
+        .header .container {
+          width: 100%;
+          margin: 0;
+        }
+      }
+      @media (max-width: 760px) {
+        .header {
+          height: auto;
+        }
+        .header .container {
+          width: 100%;
+          margin: 0;
+        }
+        .header__logo {
+          padding: 0 0 13px 20px;
+          width: 100%;
+          overflow: hidden;
+          float: none;
+        }
+        .header__logo h1 {
+          font-size: 14px;
+        }
+        .header__logo img {
+          max-height: 45px;
+        }
+        .header__nav {
+          height: 0;
+          overflow: hidden;
+          float: none;
+        }
+        .header__nav a {
+          float: none;
+          display: block;
+          margin: 0;
+          height: auto;
+          padding: 10px 20px;
+          border-bottom: 1px solid #fff;
+          background: #eee;
+        }
+        .header__nav-handle {
+          display: block;
+          float: right;
+          margin: 15px 20px 0;
+          background: #eee;
+          padding: 5px 10px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+      }
+    </style>
 </head>
 
 <body>
@@ -45,21 +151,6 @@
         </div>
     </div>
 
-    <div id="print_modal" class="modal modal-fixed-footer">
-        <div class="modal-content">
-            <h4>Ekspor PDF / PNG</h4>
-            <p>Judul Peta : <input type="text" id="judul_peta"></p>
-            <div id="print_modal_content">
-                <div id="judul_peta_item"></div>
-                <div id="peta_content"></div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a id="e_pdf" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Ekspor PDF</a>
-            <a id="e_png" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Ekspor PNG</a>
-        </div>
-    </div>
-
     <!--Import jQuery before materialize.js-->
     <link type="text/css" rel="stylesheet" href="vendors/uploadfile/uploadfile.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
@@ -81,19 +172,9 @@
     <script type="text/javascript" src="js/wms-capabilities.js"></script>
     <script type="text/javascript" src="js/dropzone.js"></script>
     <script type="text/javascript" src="js/vecloader.js"></script>
-    <script type="text/javascript" src="js/html2canvas.min.js"></script>
-    <script type="text/javascript" src="js/jspdf.min.js"></script>
-    <!-- Jelajah2 css -->
-    <!-- <link type="text/css" rel="stylesheet" href="css/jelajah2.css"> -->
-    <!-- Jelajah2 -->
-    <!-- <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript" src="js/jelajah2.js"></script> -->
-    <!-- Jelajah3 css -->
     <link type="text/css" rel="stylesheet" href="css/jelajah3.css">
-    <!-- Jelajah3 -->
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/jelajah3.js"></script>
-    
 </body>
 
 </html>

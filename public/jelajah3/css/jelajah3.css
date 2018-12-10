@@ -16,6 +16,8 @@ body {
     user-select: none;
 }
 
+
+
 .layerwindowclose {
     position: absolute;
     right: -2px;
@@ -1008,38 +1010,4 @@ input[type=range]+.thumb.active .value {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-#print_modal {
-    width: 90%;
-    max-height: 80% !important;
-    height: 80%;
-}
-
-#print_modal_content {
-    border: 2px dashed #0087F7;
-    border-radius: 5px;
-    background: white;
-    height: 800px;
-}
-
-#judul_peta_item {
-    font-size: x-large;
-    font-weight: bold;
-    color: black;
-    padding: 20px;
-}
-
-#peta_content {
-    width: 75%;
-}
-
-#peta_legend {
-    width: 25%;
-    vertical-align: top;
-}
-
-#peta_image {
-    height: 100;
-    width: 100%;
 }

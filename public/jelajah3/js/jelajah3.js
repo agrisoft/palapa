@@ -42,7 +42,6 @@ var cari_val;
 var exturl_val, exturl_type;
 var simpul_val, simpul_type, simpul_text;
 var photos;
-var layerlist = [];
 
 // Functions
 function getSimpulInfo() {
@@ -50,6 +49,7 @@ function getSimpulInfo() {
         url: palapa_api_url + "sisteminfo",
         async: false,
         success: function(data) {
+            console.log(data);
             $('.header__logo img')[0].src = data.logo;
             $('.header__logo h1 a').html('Geoportal ' + data.organization);
             window.map_extent = [parseFloat(data.extent[0]), parseFloat(data.extent[1]), parseFloat(data.extent[2]), parseFloat(data.extent[3])]
@@ -81,23 +81,6 @@ function uniqueArray(arr) {
     return a;
 }
 
-function convertImgToBase64URL(url, id, callback, outputFormat) {
-    console.log('CB', id)
-    var img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.onload = function() {
-        var canvas = document.createElement('CANVAS'),
-            ctx = canvas.getContext('2d'),
-            dataURL;
-        canvas.height = img.height;
-        canvas.width = img.width;
-        ctx.drawImage(img, 0, 0);
-        dataURL = canvas.toDataURL(outputFormat);
-        callback(dataURL, id);
-        canvas = null;
-    };
-    img.src = url;
-}
 
 function extToMerc(extent) {
     return ol.proj.transformExtent(extent, ol.proj.get('EPSG:4326'), ol.proj.get('EPSG:3857'))
@@ -135,8 +118,6 @@ function olAddWMSLayer(serviceUrl, layername, layermark, min_x, min_y, max_x, ma
         legend_html = "<img src='" + legend_url + "'>";
         $('#wmslegend_' + rndlayerid).append(legend_html);
         layer_index.push(rndlayerid);
-        var layeritem = { layer_id: String(rndlayerid), layer_nativename: layer_nativename, layer_name: layer[rndlayerid].get('title') };
-        layerlist.push(layeritem);
         layer[rndlayerid].setZIndex(layer.length);
     }, 1000);
 }
@@ -173,8 +154,6 @@ function olAddFrontWMSLayer(serviceUrl, layername, layermark, min_x, min_y, max_
         legend_html = "<img src='" + legend_url + "'>";
         $('#wmslegend_' + rndlayerid).append(legend_html);
         layer_index.push(rndlayerid);
-        var layeritem = { layer_id: String(rndlayerid), layer_nativename: layer_nativename, layer_name: layer[rndlayerid].get('title') };
-        layerlist.push(layeritem);
         layer[rndlayerid].setZIndex(layer.length);
     }, 1000);
 }
@@ -214,8 +193,6 @@ function olAddDEFLayer(layername, layermark, layer_nativename, aktif, min_x, min
         legend_html = "<img src='" + legend_url + "'>";
         $('#wmslegend_' + rndlayerid).append(legend_html);
         layer_index.push(rndlayerid);
-        var layeritem = { layer_id: String(rndlayerid), layer_nativename: layer_nativename, layer_name: layer[rndlayerid].get('title') };
-        layerlist.push(layeritem);
         layer[rndlayerid].setZIndex(layer.length);
     }, 1000);
 }
@@ -253,8 +230,6 @@ function olAddRESTLayer(serviceUrl, id) {
         legend_html = "<img src='" + legend_url + "'>";
         $('#wmslegend_' + rndlayerid).append(legend_html);
         layer_index.push(rndlayerid);
-        var layeritem = { layer_id: String(rndlayerid), layer_nativename: layer_nativename, layer_name: layer[rndlayerid].get('title') };
-        layerlist.push(layeritem);
         layer[rndlayerid].setZIndex(layer.length);
     }, 1000);
 }
@@ -267,16 +242,7 @@ function layerVis(layerid) {
     }
 };
 
-function rmLayerlist(string_id) {
-    for (var i = 0; i < layerlist.length; i++) {
-        if (String(layerlist[i].layer_id) === String(string_id)) {
-            layerlist.splice(i, 1);
-        }
-    }
-}
-
 function layerRm(layerid) {
-    rmLayerlist(layerid);
     map.removeLayer(layer[layerid]);
     $("#" + layerid + "").remove();
 };
@@ -420,8 +386,6 @@ function loadShpZip(files, rndid) {
             layer[rndlayerid].setStyle(vector_style);
             listappend = "<li id='" + rndlayerid + "'><div class='collapsible-header'><div class='layer_control'><i id='visibility' class='material-icons'>check_box</i>" + layer[rndlayerid].get('title') + "</div><!--<i id='getinfo' class='material-icons right'>comment</i>--><i id='zextent' class='material-icons right'>aspect_ratio</i><i id='remove' class='material-icons right'>cancel</i></div></div><div class='collapsible-body'><div class='row opa'><span class='col s4'><i class='material-icons' style=' padding-right: 15px; position: relative; bottom: -6px;'>opacity</i>Opacity</span><div class='col s8 range-field'><input type='range' id='opacity' min='0' max='100' value='100'/></div></div><span id='wmslegend_" + rndlayerid + "'></span></div></li>";
             $('#sortableul').prepend(listappend);
-            var layeritem = { layer_id: String(rndlayerid), layer_nativename: rndlayerid, layer_name: layer[rndlayerid].get('title') };
-            layerlist.push(layeritem);
         }, 2000);
         //   delete layer;
     });
@@ -468,8 +432,6 @@ function loadGpx(files, rndid) {
             layer[rndlayerid].setStyle(vector_style)
             listappend = "<li id='" + rndlayerid + "'><div class='collapsible-header'><div class='layer_control'><i id='visibility' class='material-icons'>check_box</i>" + layer[rndlayerid].get('title') + "</div><!--<i id='getinfo' class='material-icons right'>comment</i>--><i id='zextent' class='material-icons right'>aspect_ratio</i><i id='remove' class='material-icons right'>cancel</i></div></div><div class='collapsible-body'><div class='row opa'><span class='col s4'><i class='material-icons' style=' padding-right: 15px; position: relative; bottom: -6px;'>opacity</i>Opacity</span><div class='col s8 range-field'><input type='range' id='opacity' min='0' max='100' value='100'/></div></div><span id='wmslegend_" + rndlayerid + "'></span></div></li>";
             $('#sortableul').prepend(listappend);
-            var layeritem = { layer_id: String(rndlayerid), layer_nativename: rndlayerid, layer_name: layer[rndlayerid].get('title') };
-            layerlist.push(layeritem);
         }, 2000);
     };
 
@@ -524,8 +486,6 @@ function loadCSV(files, rndid) {
                 map.getView().fit(extent, map.getSize());
                 listappend = "<li id='" + rndlayerid + "'><div class='collapsible-header'><div class='layer_control'><i id='visibility' class='material-icons'>check_box</i>" + layer[rndlayerid].get('title') + "</div><!--<i id='getinfo' class='material-icons right'>comment</i>--><i id='zextent' class='material-icons right'>aspect_ratio</i><i id='remove' class='material-icons right'>cancel</i></div></div><div class='collapsible-body'><div class='row opa'><span class='col s4'><i class='material-icons' style=' padding-right: 15px; position: relative; bottom: -6px;'>opacity</i>Opacity</span><div class='col s8 range-field'><input type='range' id='opacity' min='0' max='100' value='100'/></div></div><span id='wmslegend_" + rndlayerid + "'></span></div></li>";
                 $('#sortableul').prepend(listappend);
-                var layeritem = { layer_id: String(rndlayerid), layer_nativename: rndlayerid, layer_name: layer[rndlayerid].get('title') };
-                layerlist.push(layeritem);
             }, 2000);
         });
     }
@@ -1337,92 +1297,6 @@ $('#ukuranbtni').on('click', function(e) {
         start_measure = true;
         // addInteraction();
     }
-});
-
-var map_c;
-
-$('.modal').modal();
-
-$('#zoomextent').append("<button id='print' type='button' title='Cetak'><i id='printbtni' class='material-icons'>print</i></button></div>");
-$('#printbtni').on('click', function(e) {
-    $("#print_modal").modal("open");
-    $("#judul_peta_item").text("JUDUL PETA");
-    $("#peta_content").text('');
-    $("#peta_legend").text('');
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('PRINT');
-    map.once('rendercomplete', function(p) {
-        var map_canvas = p.context.canvas;
-        map_c = map_canvas.toDataURL()
-            // map_canvas.width = $("#peta_content").width();
-            // map_canvas.height = $("#peta_content").width() * 3 / 4;
-        $("#peta_content").html('<img id="peta_image" src="' + map_c + '">');
-        for (g = 0; g < layer_source.length; g++) {
-            if (layer_source[g]) {
-                // console.log(layer_source[g], layer[g]);
-                // var lg_title;
-                var listlegend = [];
-                for (u = 0; u < layerlist.length; u++) {
-                    if (layerlist[u].layer_nativename == layer_source[g].params_.LAYERS) {
-                        var lg_url = layer_source[g].urls + '?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=fontAntiAliasing:true&LAYER=' + layer_source[g].params_.LAYERS;
-                        var lg_title = layerlist[u].layer_name;
-                        var lg_id = g;
-                        listlegend.push({ 'lg_id': lg_id, 'lg_title': lg_title, 'lg_url': lg_url });
-                        $("#peta_legend").append("<h6>" + lg_title + "</h6><div id='lg_" + lg_id + "' >")
-                        for (k = 0; k < listlegend.length; k++) {
-                            var lgid = listlegend[k].lg_id;
-                            convertImgToBase64URL(listlegend[k].lg_url, lgid, function(base64Img, ll) {
-                                var lg_html = "<img src='" + base64Img + "'>";
-                                $("#lg_" + ll).append(lg_html);
-                            });
-                        }
-                    }
-                }
-
-            }
-        }
-    });
-    map.renderSync();
-});
-
-$("#judul_peta").keyup(function() {
-    $("#judul_peta_item").text($("#judul_peta").val());
-});
-
-// var printout = new jsPDF('l', 'pt', 'a3');
-
-// printout.setFont("Arial");
-
-$("#e_pdf").click(function() {
-    html2canvas(document.querySelector('#print_modal_content'), { scale: 1 }).then(canvas => {
-        let pdf = new jsPDF('l', 'mm', 'a4');
-        canvas.getContext('2d').scale(2, 2);
-        pdf.setFont("Arial");
-        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0);
-        pdf.save('peta.pdf');
-    });
-    // printout.fromHTML($("#print_modal_content").html(), 15, 15, {
-    //         'width': 500
-    //     },
-    //     function(saveprint) { printout.save('peta.pdf'); }
-    // );
-});
-
-$("#e_png").click(function() {
-    html2canvas(document.querySelector('#print_modal_content'), { scale: 1 }).then(canvas => {
-        let pdf = new jsPDF('l', 'mm', 'a4');
-        var link = document.createElement("a");
-        link.download = "peta.png";
-        canvas.getContext('2d').scale(2, 2);
-        canvas.toBlob(function(blob) {
-            link.href = URL.createObjectURL(blob);
-            // console.log(blob);
-            // console.log(link.href); // this line should be here
-            link.click();
-        }, 'image/png');
-    });
-
 });
 
 $("#select_ukur").on('change', function() {
