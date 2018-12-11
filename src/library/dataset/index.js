@@ -43,7 +43,7 @@ export const Dataset = ({
   if (downloadable === 'Y') {
     downloadIcon = (
       <a
-        href={`${config.dowloadWfs}${identifier}&outputFormat=shape-zip`}
+        href={`${config.api}/download_shape?layer=${identifier}`}
         className="dataset__actions-download"
       >
         <span className="icon-cloud-download" />
