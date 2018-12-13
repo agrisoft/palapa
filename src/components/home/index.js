@@ -176,7 +176,7 @@ export const Home = ({ history }) => {
                   }}
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
-                      handleSearchSubmit();
+                      handleSearchSubmit(e);
                     }
                   }}
                 />
