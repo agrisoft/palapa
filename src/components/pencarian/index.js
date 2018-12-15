@@ -141,7 +141,20 @@ const Pencarian = ({ location, history }) => {
               >
                 <span className="icon-magnifier" />
               </a>
+              <span
+                className="pencarian__clear"
+                style={{
+                  display: (keyword && keyword.length > 0) ? 'block' : 'none'
+                }}
+                onClick={() => {
+                  setKeyword('');
+                  document.getElementById('pencarian__input').focus();
+                }}
+              >
+                <span className="icon-close" />
+              </span>
               <input
+                id="pencarian__input"
                 type="text"
                 placeholder="Kata Kunci"
                 className="pencarian__input"
