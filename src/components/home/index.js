@@ -123,8 +123,9 @@ export const Home = ({ history }) => {
         <div className="home__search">
           <div className="container">
             <p className="home__search__intro">{dataBanner.tagline}</p>
-            <div className={searchClassName}>
-              <span
+            <div id="cari" className={searchClassName}>
+              <a
+                href="#cari"
                 className="search__advanced-link"
                 onClick={() => {
                   window.dispatchEvent(new Event('resize'));
@@ -132,7 +133,7 @@ export const Home = ({ history }) => {
                 }}
               >
                 <span className="icon-settings" />
-              </span>
+              </a>
               <span className="search__submit-wrapper">
                 <a
                   href="#submit-search"
