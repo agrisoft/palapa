@@ -1,7 +1,8 @@
+const host = 'http://palapa.agrisoft-cb.com';
+
 export const config = {
-  host: 'http://palapa.agrisoft-cb.com/',
-  api: 'http://palapa.agrisoft-cb.com/api',
-  wms: 'http://palapa.agrisoft-cb.com:8080/geoserver/wms?',
-  dowloadWfs: 'http://palapa.agrisoft-cb.com:8080/geoserver/wfs??service=WFS&version=1.0.0&request=GetFeature&typeName=',
+  host: `${host}/`,
+  api: `${host}/api`,
+  wms: `${host}:8080/geoserver/wms?`,
 };
 export default config;
