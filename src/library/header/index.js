@@ -29,6 +29,7 @@ const Header = ({
           <NavLink exact activeClassName="active" to="/">Home</NavLink>
           <a href="/jelajah/">Jelajah</a>
           <NavLink activeClassName="active" to="/pencarian/">Pencarian</NavLink>
+          <a href="/gspalapa/">Login</a>
         </div>
       </div>
     </div>
