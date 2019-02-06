@@ -52,6 +52,7 @@ function getSimpulInfo() {
         success: function(data) {
             $('.header__logo img')[0].src = data.logo;
             $('.header__logo h1 a').html('Geoportal ' + data.organization);
+            document.title = 'Geoportal ' + data.organization;
             window.map_extent = [parseFloat(data.extent[0]), parseFloat(data.extent[1]), parseFloat(data.extent[2]), parseFloat(data.extent[3])]
         }
     })
